@@ -1,14 +1,14 @@
 package br.com.portifolio.ProjetoBebidas.Enum;
 
 
-public enum TipoBebida {
+public enum TipoBebidaEnum {
 
-    ALCOOLICA(1),
-    SEM_ALCOOL(2);
+    SEM_ALCOOL(1),
+    ALCOOLICA(2);
 
     private int codigo;
 
-    TipoBebida(int codigo) {
+    TipoBebidaEnum(int codigo) {
         this.codigo = codigo;
     }
 
@@ -16,8 +16,8 @@ public enum TipoBebida {
         return codigo;
     }
 
-    public static TipoBebida valueOf(int code){
-        for (TipoBebida value : TipoBebida.values()){
+    public static TipoBebidaEnum valueOf(int code){
+        for (TipoBebidaEnum value : TipoBebidaEnum.values()){
             if (value.getCodigo() == code) {
                 return value;
             }

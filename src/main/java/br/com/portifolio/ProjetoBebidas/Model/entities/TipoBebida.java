@@ -1,32 +1,33 @@
 package br.com.portifolio.ProjetoBebidas.Model.entities;
 
 import jakarta.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "tipobebida")
-public class TipoBebidaJPA implements Serializable {
+public class TipoBebida {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id")
-    private short id;
+    private int id;
 
     @Column (name = "descricao")
     private String descricao;
 
-    public TipoBebidaJPA() {}
-
-    public TipoBebidaJPA(short id, String descricao) {
+    public TipoBebida() {}
+    public TipoBebida(int id) {
+        this.id = id;
+    }
+    public TipoBebida(int id, String descricao) {
         this.id = id;
         this.descricao = descricao;
     }
 
-    public short getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(short id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,5 +37,13 @@ public class TipoBebidaJPA implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoBebida{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
 }

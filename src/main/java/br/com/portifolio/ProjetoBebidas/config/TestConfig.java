@@ -1,7 +1,8 @@
 package br.com.portifolio.ProjetoBebidas.config;
 
-import br.com.portifolio.ProjetoBebidas.Enum.TipoBebida;
+import br.com.portifolio.ProjetoBebidas.Enum.TipoBebidaEnum;
 import br.com.portifolio.ProjetoBebidas.Model.entities.Bebida;
+import br.com.portifolio.ProjetoBebidas.Model.entities.TipoBebida;
 import br.com.portifolio.ProjetoBebidas.Repository.BebidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,24 +17,13 @@ public class TestConfig implements CommandLineRunner {
     @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
     private BebidaRepository bebidaRepository;
 
-    /*@Autowired
-    private OrderRepository orderRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
-    private OrderItemRepository orderItemRepository;*/
-
     //CommandLineRunner em tempo de execução, roda o comando abaixo.
     @Override
     public void run(String... args) throws Exception {
 
-        Bebida bebida1 = new Bebida("CACHACA", TipoBebida.ALCOOLICA,100);
-        bebidaRepository.save(bebida1);
+        TipoBebida tipoBebida = new TipoBebida(TipoBebidaEnum.ALCOOLICA.getCodigo(),"Teste");
+        Bebida beb1 = new Bebida("CACHACA",100,tipoBebida);
+        bebidaRepository.save(beb1);
 
         /*Category cat1 = new Category(null, "Electronics");
         Category cat2 = new Category(null, "Books");

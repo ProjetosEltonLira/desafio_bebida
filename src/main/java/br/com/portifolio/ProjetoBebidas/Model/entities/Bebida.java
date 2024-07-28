@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.Model.entities;
 
-import br.com.portifolio.ProjetoBebidas.Enum.TipoBebida;
+import br.com.portifolio.ProjetoBebidas.Enum.TipoBebidaEnum;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -20,21 +20,21 @@ public class Bebida implements Serializable {
     @Column (name = "quantidade")
     private double quantidade;
 
-    //@ManyToOne(fetch = FetchType.LAZY, optional = false) //oque isso faz ?
-    //@JoinColumn(name = "tipobebida", nullable = false)
-    /*@Enumerated(EnumType.ORDINAL)
-    @Column (name = "idtipobebida")
-    private TipoDeBebida tipo;*/
+    @ManyToOne
+    @JoinColumn(name = "idtipobebida")
+    private TipoBebida tipoBebida;
 
-    @Column (name = "idtipobebida")
-    private int tipo;
+    //private int tipo;
 
     public Bebida() {}
-    public Bebida(String nome, TipoBebida tipoBebida,double quantidade) {
+
+    public Bebida(String nome, double quantidade, TipoBebida tipoBebida) {
         this.nome = nome;
         this.quantidade = quantidade;
-        setTipoBebida(tipoBebida);
+        this.tipoBebida = tipoBebida;
+        //this.tipo = tipo;
     }
+    //setTipoBebida(tipoBebida);
 
     public Long getId() {
         return id;
@@ -44,21 +44,21 @@ public class Bebida implements Serializable {
         this.id = id;
     }
 
-    /*public TipoDeBebida getTipo() {
-        return tipo;
+    public TipoBebida getTipoBebida() {
+        return tipoBebida;
     }
 
-    public void setTipo(TipoDeBebida tipo) {
-        this.tipo = tipo;
-    }*/
+    public void setTipoBebida(TipoBebida tipoBebida) {
+        this.tipoBebida = tipoBebida;
+    }
 
-    public int getTipo() {
+   /* public int getTipo() {
         return tipo;
     }
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-    }
+    }*/
 
     public String getNome() {
         return nome;
@@ -76,18 +76,18 @@ public class Bebida implements Serializable {
         this.quantidade = quantidade;
     }
 
-    public TipoBebida getTipoDeBebida() {
-        return TipoBebida.valueOf(tipo);
+   /* public TipoBebidaEnum getTipoDeBebida() {
+        return TipoBebidaEnum.valueOf(tipo);
     }
 
-    public void setTipoBebida(TipoBebida tipo) {
+    public void setTipoBebida(TipoBebidaEnum tipo) {
         if (tipo != null) {
             this.tipo = tipo.getCodigo();
         }
-    }
+    }*/
 
     @Override
     public String toString() {
-        return  "Nome:" + getNome() + " Tipo:" + getTipo() + " Qtde:" + getQuantidade();
+        return  "Nome:" + getNome() + " Tipo:" + tipoBebida.getDescricao() + " Qtde:" + getQuantidade();
     }
 }
