@@ -1,15 +1,14 @@
 package br.com.portifolio.ProjetoBebidas.controllers;
 
 
-import br.com.portifolio.ProjetoBebidas.Model.entities.Bebida;
-import br.com.portifolio.ProjetoBebidas.Service.BebidaService;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+import br.com.portifolio.ProjetoBebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping (value = "/Bebida")
@@ -32,13 +31,13 @@ public class BebidaController {
 
 
     @PostMapping
-    public ResponseEntity<Bebida> insert(@RequestBody Bebida bebidaEntry){
-        Bebida bebida = service.insert(bebidaEntry);
+    public ResponseEntity<BebidaEntity> insert(@RequestBody BebidaEntity bebidaEntityEntry){
+        BebidaEntity bebidaEntity = service.insert(bebidaEntityEntry);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(bebida.getId())
+                .buildAndExpand(bebidaEntity.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(bebida);
+        return ResponseEntity.created(uri).body(bebidaEntity);
     }
 
     /*@DeleteMapping (value = "/{id}")

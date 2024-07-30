@@ -1,7 +1,7 @@
-package br.com.portifolio.ProjetoBebidas.Service;
+package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.Model.entities.Bebida;
-import br.com.portifolio.ProjetoBebidas.Repository.BebidaRepository;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,9 +14,9 @@ public class BebidaService {
     @Autowired
     private BebidaRepository repository;
 
-    public Bebida insert(Bebida bebida){
-        repository.save(bebida);
-        return bebida;
+    public BebidaEntity insert(BebidaEntity bebidaEntity){
+        repository.save(bebidaEntity);
+        return bebidaEntity;
     }
 
     public void delete(Long id) {
@@ -35,7 +35,7 @@ public class BebidaService {
     }
 
 
-    public Bebida findById(Long id) {
+    public BebidaEntity findById(Long id) {
         //return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
         return repository.findById(id).orElseThrow(RuntimeException::new);
     }

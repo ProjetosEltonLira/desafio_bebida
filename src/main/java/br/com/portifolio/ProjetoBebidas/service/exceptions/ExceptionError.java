@@ -1,4 +1,4 @@
-package br.com.portifolio.ProjetoBebidas.exception;
+package br.com.portifolio.ProjetoBebidas.service.exceptions;
 
 public class ExceptionError extends Exception{
 

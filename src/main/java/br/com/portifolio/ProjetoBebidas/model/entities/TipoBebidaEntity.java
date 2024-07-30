@@ -1,33 +1,31 @@
-package br.com.portifolio.ProjetoBebidas.Model.entities;
+package br.com.portifolio.ProjetoBebidas.model.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "tipobebida")
-public class TipoBebida {
+public class TipoBebidaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    private int id;
+    private Long id;
 
-    @Column (name = "descricao")
+    @Column(nullable = false, length = 60)
     private String descricao;
 
-    public TipoBebida() {}
-    public TipoBebida(int id) {
+    public TipoBebidaEntity(){}
+    public TipoBebidaEntity(Long id) {
         this.id = id;
-    }
-    public TipoBebida(int id, String descricao) {
-        this.id = id;
-        this.descricao = descricao;
     }
 
-    public int getId() {
+    // Getters e Setters
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,8 +1,8 @@
-package br.com.portifolio.ProjetoBebidas.Service;
+package br.com.portifolio.ProjetoBebidas.service;
 
 import br.com.portifolio.ProjetoBebidas.AplicationConfigTest;
-import br.com.portifolio.ProjetoBebidas.Model.entities.Bebida;
-import br.com.portifolio.ProjetoBebidas.Repository.BebidaRepository;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class BebidaServiceTest extends AplicationConfigTest {
    @MockBean
    private BebidaRepository repository;
 
-   Bebida bebida;
+   BebidaEntity bebidaEntity;
 
    @BeforeEach // executa antes dos testes
    public void configuracaoInicial() {
