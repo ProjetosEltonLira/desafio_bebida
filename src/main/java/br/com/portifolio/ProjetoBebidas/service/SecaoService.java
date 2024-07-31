@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
+import br.com.portifolio.ProjetoBebidas.model.entities.Secao;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoRepository;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,13 @@ public class SecaoService {
     @Autowired
     private SecaoRepository repository;
 
-    public SecaoEntity insert(SecaoEntity secaoEntity){
-        repository.save(secaoEntity);
-        return secaoEntity;
+    public Secao insert(Secao secao){
+        repository.save(secao);
+        return secao;
     }
 
-    public SecaoEntity findById(Long id) {
-        SecaoEntity secaoEntity =  repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
-        return secaoEntity;
+    public Secao findById(Long id) {
+        Secao secao =  repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+        return secao;
     }
 }

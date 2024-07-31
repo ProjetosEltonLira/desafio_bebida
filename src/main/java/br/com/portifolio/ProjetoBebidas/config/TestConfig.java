@@ -1,11 +1,11 @@
 package br.com.portifolio.ProjetoBebidas.config;
 
-import br.com.portifolio.ProjetoBebidas.model.Bebida;
-import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
-import br.com.portifolio.ProjetoBebidas.model.entities.SecaoBebidaEntity;
-import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
-import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
+import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
+import br.com.portifolio.ProjetoBebidas.model.entities.Bebida;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecao;
+import br.com.portifolio.ProjetoBebidas.model.entities.Secao;
+import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebida;
+import br.com.portifolio.ProjetoBebidas.model.entities.pk.BebidaSecaoKey;
 import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoRepository;
@@ -32,21 +32,30 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        TipoBebidaEntity tipoBebidaAlcoolica = new TipoBebidaEntity(TipoBebida.ALCOOLICA.getCodigo());
-        TipoBebidaEntity tipoBebidaSemAlcool = new TipoBebidaEntity(TipoBebida.SEM_ALCOOL.getCodigo());
 
-        //Optional<Sessao> optSessao =  sessaoRepository.findById(2l);
+        TipoBebida tipoBebida = new TipoBebida();
+        tipoBebida.setId(TipoBebidaEnum.ALCOOLICA.getCodigo());
+
+                //Optional<Sessao> optSessao =  sessaoRepository.findById(2l);
         //System.out.println(secaoRepository.findById(2l));
         //Bebida bebida = new Bebida();
 
-        BebidaEntity bebida = new BebidaEntity("CACHAÇA", tipoBebidaAlcoolica);
+        Bebida bebida = new Bebida(1,"CAXAAÇA", tipoBebida,null );
         //bebidaRepository.save(bebida);
 
-        SecaoEntity secao = new SecaoEntity(500.0, 0.0);
+        Secao secao = new Secao(1,600.0, 0.0,null);
         //secaoRepository.save(secao);
 
-        SecaoBebidaEntity secaoBebida = new SecaoBebidaEntity(secao, bebida, 100);
-        secaoBebidaRepository.save(secaoBebida);
+        //BebidaSecao bebidaSecao = new BebidaSecao(bebida,secao,100.0);
+        //secaoBebidaRepository.save(bebidaSecao);
+
+        BebidaSecao bebidaSecao2  = new BebidaSecao();
+        bebidaSecao2.setBebida(bebida);
+        bebidaSecao2.setSecao(secao);
+        bebidaSecao2.setQuantidade(10.0);
+
+        secaoBebidaRepository.save(bebidaSecao2);
+
     }
 }
 

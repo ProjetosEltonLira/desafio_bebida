@@ -1,7 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.controllers;
 
 
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+import br.com.portifolio.ProjetoBebidas.model.entities.Bebida;
 import br.com.portifolio.ProjetoBebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,13 +31,13 @@ public class BebidaController {
 
 
     @PostMapping
-    public ResponseEntity<BebidaEntity> insert(@RequestBody BebidaEntity bebidaEntityEntry){
-        BebidaEntity bebidaEntity = service.insert(bebidaEntityEntry);
+    public ResponseEntity<Bebida> insert(@RequestBody Bebida bebidaEntry){
+        Bebida bebida = service.insert(bebidaEntry);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(bebidaEntity.getId())
+                .buildAndExpand(bebida.getId())
                 .toUri();
-        return ResponseEntity.created(uri).body(bebidaEntity);
+        return ResponseEntity.created(uri).body(bebida);
     }
 
     /*@DeleteMapping (value = "/{id}")
