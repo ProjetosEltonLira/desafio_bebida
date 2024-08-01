@@ -1,8 +1,3 @@
-drop table bebida_sessao;
-drop table bebida;
-drop table sessao;
-drop table tipobebida;
-
 CREATE TABLE tipobebida (
     id INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(60) NOT NULL
@@ -15,6 +10,11 @@ INSERT INTO tipobebida (descricao) VALUES ('SUCO');
 INSERT INTO tipobebida (descricao) VALUES ('CERVEJA');
 INSERT INTO tipobebida (descricao) VALUES ('VINHO');
 INSERT INTO tipobebida (descricao) VALUES ('AGUA');
+
+CREATE TABLE tipobebida (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    descricao VARCHAR(60) NOT NULL
+);
 
 CREATE TABLE secao (
     id INT PRIMARY KEY AUTO_INCREMENT,

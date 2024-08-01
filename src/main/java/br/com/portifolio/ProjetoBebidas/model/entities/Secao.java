@@ -1,5 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -19,15 +20,16 @@ public class Secao implements Serializable {
     @Column(name = "volumeatual")
     private Double volumeAtual;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.secao")
     private Set<BebidaSecao> bebidaSessoes;
 
     public Secao(){}
-    public Secao(Integer id, Double capacidade, Double volumeAtual, Set<BebidaSecao> bebidaSessoes) {
+    public Secao(Integer id, Double capacidade, Double volumeAtual) {
         this.id = id;
         this.capacidade = capacidade;
         this.volumeAtual = volumeAtual;
-        this.bebidaSessoes = bebidaSessoes;
+        //this.bebidaSessoes = bebidaSessoes;
     }
 
     // Getters and Setters

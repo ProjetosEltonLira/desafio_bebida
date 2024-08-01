@@ -33,28 +33,25 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) {
 
 
-        TipoBebida tipoBebida = new TipoBebida();
-        tipoBebida.setId(TipoBebidaEnum.ALCOOLICA.getCodigo());
+        //TipoBebida tipoBebida = new TipoBebida();
+        //tipoBebida.setId(TipoBebidaEnum.ALCOOLICA.getCodigo());
 
                 //Optional<Sessao> optSessao =  sessaoRepository.findById(2l);
         //System.out.println(secaoRepository.findById(2l));
         //Bebida bebida = new Bebida();
 
-        Bebida bebida = new Bebida(1,"CAXAAÇA", tipoBebida,null );
+        //Bebida bebida = new Bebida(1,"CAXAAÇA", tipoBebida);
         //bebidaRepository.save(bebida);
 
-        Secao secao = new Secao(1,600.0, 0.0,null);
+        //Secao secao = new Secao(1,400.0, 300.0);
         //secaoRepository.save(secao);
 
         //BebidaSecao bebidaSecao = new BebidaSecao(bebida,secao,100.0);
         //secaoBebidaRepository.save(bebidaSecao);
-
-        BebidaSecao bebidaSecao2  = new BebidaSecao();
-        bebidaSecao2.setBebida(bebida);
-        bebidaSecao2.setSecao(secao);
-        bebidaSecao2.setQuantidade(10.0);
-
-        secaoBebidaRepository.save(bebidaSecao2);
+        //se já existir registro, o sistema faz um select de dados.
+        //secaoBebidaRepository.save(new BebidaSecao(bebida,secao,10.0));
+        //
+        //secaoBebidaRepository.save(new BebidaSecao(bebida,secao,100.0));
 
     }
 }

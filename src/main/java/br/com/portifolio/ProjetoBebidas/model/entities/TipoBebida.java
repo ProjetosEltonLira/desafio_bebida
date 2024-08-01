@@ -1,4 +1,5 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class TipoBebida implements Serializable {
     @Column(nullable = false, length = 60)
     private String descricao;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tipoBebida")
     private Set<Bebida> bebidas;
 

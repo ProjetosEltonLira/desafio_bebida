@@ -16,7 +16,6 @@ public class BebidaSecaoKey implements Serializable {
     @JoinColumn(name = "bebida_id")
     private Bebida bebida;
 
-
     @ManyToOne
     @JoinColumn(name = "secao_id")
     private Secao secao;

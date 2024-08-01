@@ -1,7 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.Set;
 
@@ -20,15 +19,16 @@ public class Bebida implements Serializable {
     @JoinColumn(name = "tipobebida_id", nullable = false)
     private TipoBebida tipoBebida;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.bebida")
     private Set<BebidaSecao> bebidaSessoes;
 
     public Bebida(){}
-    public Bebida(Integer id, String nome, TipoBebida tipoBebida, Set<BebidaSecao> bebidaSessoes) {
+    public Bebida(Integer id, String nome, TipoBebida tipoBebida) {
         this.id = id;
         this.nome = nome;
         this.tipoBebida = tipoBebida;
-        this.bebidaSessoes = bebidaSessoes;
+        //this.bebidaSessoes = bebidaSessoes;
     }
 
     // Getters and Setters

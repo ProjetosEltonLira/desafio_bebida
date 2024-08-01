@@ -9,26 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
-@RequestMapping (value = "/Bebida")
+@RequestMapping (value = "/bebida")
 public class BebidaController {
 
     @Autowired
     private BebidaService service;
-
-    /*@GetMapping
-    public ResponseEntity<List<ResponsePessoaDTO>> findAll(){
-        List<ResponsePessoaDTO> list = service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
-
-    @GetMapping (value = "/{id}")// Isso indica que permite receber um valor na URL
-    public ResponseEntity<ResponsePessoaDTO> findById(@PathVariable Long id){
-        ResponsePessoaDTO responsePessoaDTO = service.findById(id);
-        return ResponseEntity.ok().body(responsePessoaDTO);
-    }*/
-
 
     @PostMapping
     public ResponseEntity<Bebida> insert(@RequestBody Bebida bebidaEntry){
@@ -39,6 +27,19 @@ public class BebidaController {
                 .toUri();
         return ResponseEntity.created(uri).body(bebida);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Bebida>> findAll() {
+        List<Bebida> list = service.findAll();
+        return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping (value = "/{id}") // Isso indica que permite receber um valor na URL
+    public ResponseEntity<Bebida> findById(@PathVariable Long id) { // para o Spring aceitar esse valor vindo da URL precisa colocar a notação @PathVariable
+        Bebida bebida = service.findById(id);
+        return ResponseEntity.ok().body(bebida);
+    }
+
 
     /*@DeleteMapping (value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
