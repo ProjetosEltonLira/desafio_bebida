@@ -1,3 +1,8 @@
+drop table bebida_sessao;
+drop table bebida;
+drop table sessao;
+drop table tipobebida;
+
 CREATE TABLE tipobebida (
     id INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(60) NOT NULL
@@ -35,6 +40,18 @@ CREATE TABLE bebida_secao (
     secao_id INT,
     quantidade DOUBLE,
     PRIMARY KEY (bebida_id, secao_id),
+    FOREIGN KEY (bebida_id) REFERENCES bebida(id),
+    FOREIGN KEY (secao_id) REFERENCES secao(id)
+);
+
+
+CREATE TABLE historico (
+    bebida_id INT,
+    secao_id INT,
+    quantidade DOUBLE,
+    tipoSolicitacao CHAR(8),
+    nomeSolicitante VARCHAR(60),
+    dataSolicitacao datetime,
     FOREIGN KEY (bebida_id) REFERENCES bebida(id),
     FOREIGN KEY (secao_id) REFERENCES secao(id)
 );

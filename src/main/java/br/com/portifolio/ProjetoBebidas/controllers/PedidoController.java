@@ -1,34 +1,35 @@
 package br.com.portifolio.ProjetoBebidas.controllers;
 
 
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
-import br.com.portifolio.ProjetoBebidas.service.BebidaService;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDto;
+import br.com.portifolio.ProjetoBebidas.service.SecaoBebidaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
-@RequestMapping (value = "/bebida")
-public class BebidaController {
+@RequestMapping (value = "/cadastrar")
+public class PedidoController {
 
     @Autowired
-    private BebidaService service;
+    private SecaoBebidaService service;
+
 
     @PostMapping
-    public ResponseEntity<BebidaEntity> insert(@RequestBody BebidaEntity bebidaEntityEntry){
-        BebidaEntity bebidaEntity = service.insert(bebidaEntityEntry);
+    public ResponseEntity<PedidoResponseDto> insert(@RequestBody PedidoDto pedidoDTO){
+        PedidoResponseDto responseDTO = service.insert(pedidoDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(bebidaEntity.getId())
+                .buildAndExpand()
                 .toUri();
-        return ResponseEntity.created(uri).body(bebidaEntity);
+        return ResponseEntity.created(uri).body(responseDTO);
     }
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<List<BebidaEntity>> findAll() {
         List<BebidaEntity> list = service.findAll();
         return ResponseEntity.ok().body(list);
@@ -41,7 +42,7 @@ public class BebidaController {
     }
 
 
-    /*@DeleteMapping (value = "/{id}")
+    @DeleteMapping (value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();

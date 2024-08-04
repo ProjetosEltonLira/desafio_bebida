@@ -1,12 +1,12 @@
 package br.com.portifolio.ProjetoBebidas.entities;
 
-import br.com.portifolio.ProjetoBebidas.model.entities.Bebida;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BebidaTest {
 
-    private Bebida bebida;
+    private BebidaEntity bebidaEntity;
 
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {

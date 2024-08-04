@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "bebida")
-public class Bebida implements Serializable {
+public class BebidaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,17 @@ public class Bebida implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tipobebida_id", nullable = false)
-    private TipoBebida tipoBebida;
+    private TipoBebidaEntity tipoBebidaEntity;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "id.bebida")
-    private Set<BebidaSecao> bebidaSessoes;
+    //O id é a classe BebidaSecao, que tem a variável id, ".bebidaEntity" é uma variável dentro da BebidaSecaoKey
+    @OneToMany(mappedBy = "id.bebidaEntity")
+    private Set<BebidaSecaoEntity> bebidaSessoes;
 
-    public Bebida(){}
-    public Bebida(Integer id, String nome, TipoBebida tipoBebida) {
+    public BebidaEntity(){}
+    public BebidaEntity(Integer id, String nome, TipoBebidaEntity tipoBebidaEntity) {
         this.id = id;
         this.nome = nome;
-        this.tipoBebida = tipoBebida;
+        this.tipoBebidaEntity = tipoBebidaEntity;
         //this.bebidaSessoes = bebidaSessoes;
     }
 
@@ -48,19 +48,19 @@ public class Bebida implements Serializable {
         this.nome = nome;
     }
 
-    public TipoBebida getTipoBebida() {
-        return tipoBebida;
+    public TipoBebidaEntity getTipoBebida() {
+        return tipoBebidaEntity;
     }
 
-    public void setTipoBebida(TipoBebida tipoBebida) {
-        this.tipoBebida = tipoBebida;
+    public void setTipoBebida(TipoBebidaEntity tipoBebidaEntity) {
+        this.tipoBebidaEntity = tipoBebidaEntity;
     }
 
-    public Set<BebidaSecao> getBebidaSessoes() {
+    public Set<BebidaSecaoEntity> getBebidaSessoes() {
         return bebidaSessoes;
     }
 
-    public void setBebidaSessoes(Set<BebidaSecao> bebidaSessoes) {
+    public void setBebidaSessoes(Set<BebidaSecaoEntity> bebidaSessoes) {
         this.bebidaSessoes = bebidaSessoes;
     }
 }

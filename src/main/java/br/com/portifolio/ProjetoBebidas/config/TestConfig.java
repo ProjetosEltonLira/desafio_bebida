@@ -1,12 +1,8 @@
 package br.com.portifolio.ProjetoBebidas.config;
 
-import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
-import br.com.portifolio.ProjetoBebidas.model.entities.Bebida;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecao;
-import br.com.portifolio.ProjetoBebidas.model.entities.Secao;
-import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.entities.pk.BebidaSecaoKey;
+import br.com.portifolio.ProjetoBebidas.model.entities.HistoricoEntity;
 import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
+import br.com.portifolio.ProjetoBebidas.repository.HistoricoRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
     private SecaoBebidaRepository secaoBebidaRepository;
+
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
+    private HistoricoRepository historicoRepository;
 
     //CommandLineRunner em tempo de execução, roda o comando abaixo.
     @Override
@@ -53,6 +52,9 @@ public class TestConfig implements CommandLineRunner {
         //
         //secaoBebidaRepository.save(new BebidaSecao(bebida,secao,100.0));
 
+        //HistoricoEntity historico = new HistoricoEntity(1,1,100.0,"ENTRADA","ELTON");
+        //historicoRepository.save(historico);
+        //System.out.println(historico);
     }
 }
 

@@ -1,7 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.model.entities.pk;
 
-import br.com.portifolio.ProjetoBebidas.model.entities.Bebida;
-import br.com.portifolio.ProjetoBebidas.model.entities.Secao;
+import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,25 +14,25 @@ public class BebidaSecaoKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "bebida_id")
-    private Bebida bebida;
+    private BebidaEntity bebidaEntity;
 
     @ManyToOne
     @JoinColumn(name = "secao_id")
-    private Secao secao;
+    private SecaoEntity secaoEntity;
 
     // Getters, Setters, hashCode, and equals methods
-    public Bebida getBebida() {
-        return bebida;
+    public BebidaEntity getBebida() {
+        return bebidaEntity;
     }
-    public void setBebida(Bebida bebida) {
-        this.bebida = bebida;
+    public void setBebida(BebidaEntity bebidaEntity) {
+        this.bebidaEntity = bebidaEntity;
     }
 
-    public Secao getSecao() {
-        return secao;
+    public SecaoEntity getSecao() {
+        return secaoEntity;
     }
-    public void setSecaoId(Secao secao) {
-        this.secao = secao;
+    public void setSecaoId(SecaoEntity secaoEntity) {
+        this.secaoEntity = secaoEntity;
     }
 
     @Override
@@ -40,11 +40,11 @@ public class BebidaSecaoKey implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BebidaSecaoKey that = (BebidaSecaoKey) o;
-        return Objects.equals(bebida, that.bebida) && Objects.equals(secao, that.secao);
+        return Objects.equals(bebidaEntity, that.bebidaEntity) && Objects.equals(secaoEntity, that.secaoEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bebida, secao);
+        return Objects.hash(bebidaEntity, secaoEntity);
     }
 }

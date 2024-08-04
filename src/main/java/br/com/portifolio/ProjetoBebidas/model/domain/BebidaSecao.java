@@ -1,18 +1,13 @@
-package br.com.portifolio.ProjetoBebidas.model.entities;
+package br.com.portifolio.ProjetoBebidas.model.domain;
 
-import br.com.portifolio.ProjetoBebidas.model.entities.pk.BebidaSecaoKey;
-import jakarta.persistence.*;
+
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "bebida_secao")
-public class BebidaSecao implements Serializable {
+public class BebidaSecao  {
 
-    @EmbeddedId
     private BebidaSecaoKey id = new BebidaSecaoKey();
-
     private Double quantidade;
 
     public BebidaSecao(){}
@@ -22,35 +17,29 @@ public class BebidaSecao implements Serializable {
         this.quantidade = quantidade;
     }
 
-    // Getters and Setters
+
+
     public BebidaSecaoKey getId() {
         return id;
     }
-
     public void setId(BebidaSecaoKey id) {
         this.id = id;
     }
-
     public Bebida getBebida() {
         return id.getBebida();
     }
-
     public void setBebida(Bebida bebida) {
         this.id.setBebida(bebida);
     }
-
     public Secao getSecao() {
         return id.getSecao();
     }
-
     public void setSecao(Secao secao) {
         this.id.setSecaoId(secao);
     }
-
     public Double getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }

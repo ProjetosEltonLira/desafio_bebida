@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tipobebida")
-public class TipoBebida implements Serializable {
+public class TipoBebidaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +17,17 @@ public class TipoBebida implements Serializable {
     private String descricao;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "tipoBebida")
-    private Set<Bebida> bebidas;
+    @OneToMany(mappedBy = "tipoBebidaEntity")
+    private Set<BebidaEntity> bebidaEntities;
 
-    public TipoBebida(){}
-    public TipoBebida(int id){
+    public TipoBebidaEntity(){}
+    public TipoBebidaEntity(int id){
         this.id = id;
     }
-    public TipoBebida(int id, String descricao, Set<Bebida> bebidas) {
+    public TipoBebidaEntity(int id, String descricao, Set<BebidaEntity> bebidaEntities) {
         this.id = id;
         this.descricao = descricao;
-        this.bebidas = bebidas;
+        this.bebidaEntities = bebidaEntities;
     }
 
 
@@ -48,11 +48,11 @@ public class TipoBebida implements Serializable {
         this.descricao = descricao;
     }
 
-    public Set<Bebida> getBebidas() {
-        return bebidas;
+    public Set<BebidaEntity> getBebidas() {
+        return bebidaEntities;
     }
 
-    public void setBebidas(Set<Bebida> bebidas) {
-        this.bebidas = bebidas;
+    public void setBebidas(Set<BebidaEntity> bebidaEntities) {
+        this.bebidaEntities = bebidaEntities;
     }
 }
