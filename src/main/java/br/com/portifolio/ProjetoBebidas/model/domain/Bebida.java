@@ -1,10 +1,8 @@
 package br.com.portifolio.ProjetoBebidas.model.domain;
 
 import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
-import java.io.Serializable;
 
-
-public class Bebida implements Serializable {
+public class Bebida {
 
     private Integer id;
     private String nome;
@@ -17,7 +15,6 @@ public class Bebida implements Serializable {
         this.tipoBebidaEnum = tipoBebidaEnum;
         //this.bebidaSessoes = bebidaSessoes;
     }
-
     // Getters and Setters
     public Integer getId() {
         return id;
@@ -42,4 +39,17 @@ public class Bebida implements Serializable {
     public void setTipoBebida(TipoBebidaEnum tipoBebidaEnum) {
         this.tipoBebidaEnum = tipoBebidaEnum;
     }
+
+
+
+    @Override
+    public String toString() {
+        return "Bebida{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", tipoBebidaEnum=" + tipoBebidaEnum +
+                '}';
+    }
+
+
 }

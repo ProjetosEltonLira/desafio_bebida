@@ -14,11 +14,11 @@ public class BebidaSecaoKey implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "bebida_id")
-    private BebidaEntity bebidaEntity;
+    public BebidaEntity bebidaEntity;
 
     @ManyToOne
     @JoinColumn(name = "secao_id")
-    private SecaoEntity secaoEntity;
+    public SecaoEntity secaoEntity;
 
     // Getters, Setters, hashCode, and equals methods
     public BebidaEntity getBebida() {
@@ -46,5 +46,13 @@ public class BebidaSecaoKey implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(bebidaEntity, secaoEntity);
+    }
+
+    @Override
+    public String toString() {
+        return "BebidaSecaoKey{" +
+                "bebidaEntity=" + bebidaEntity +
+                ", secaoEntity=" + secaoEntity +
+                '}';
     }
 }

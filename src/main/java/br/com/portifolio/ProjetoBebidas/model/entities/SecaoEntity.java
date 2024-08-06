@@ -17,18 +17,14 @@ public class SecaoEntity implements Serializable {
     @Column(name = "capacidade")
     private Double capacidade;
 
-    @Column(name = "volumeatual")
-    private Double volumeAtual;
-
     @JsonIgnore
     @OneToMany(mappedBy = "id.secaoEntity")
     private Set<BebidaSecaoEntity> bebidaSessoes;
 
     public SecaoEntity(){}
-    public SecaoEntity(Integer id, Double capacidade, Double volumeAtual) {
+    public SecaoEntity(Integer id, Double capacidade) {
         this.id = id;
         this.capacidade = capacidade;
-        this.volumeAtual = volumeAtual;
         //this.bebidaSessoes = bebidaSessoes;
     }
 
@@ -47,14 +43,6 @@ public class SecaoEntity implements Serializable {
 
     public void setCapacidade(Double capacidade) {
         this.capacidade = capacidade;
-    }
-
-    public Double getVolumeAtual() {
-        return volumeAtual;
-    }
-
-    public void setVolumeAtual(Double volumeAtual) {
-        this.volumeAtual = volumeAtual;
     }
 
     public Set<BebidaSecaoEntity> getBebidaSessoes() {

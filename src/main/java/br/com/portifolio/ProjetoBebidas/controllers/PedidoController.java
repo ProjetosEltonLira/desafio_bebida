@@ -3,7 +3,8 @@ package br.com.portifolio.ProjetoBebidas.controllers;
 
 import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
 import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDto;
-import br.com.portifolio.ProjetoBebidas.service.SecaoBebidaService;
+import br.com.portifolio.ProjetoBebidas.service.BebidaSecaoService;
+import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,18 @@ import java.net.URI;
 public class PedidoController {
 
     @Autowired
-    private SecaoBebidaService service;
+    private BebidaSecaoService service;
 
 
     @PostMapping
-    public ResponseEntity<PedidoResponseDto> insert(@RequestBody PedidoDto pedidoDTO){
-        PedidoResponseDto responseDTO = service.insert(pedidoDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+    public ResponseEntity<PedidoResponseDto> insert(@RequestBody PedidoDto pedidoDTO) {
+        PedidoResponseDto responseDTO = service.inserirPedido(pedidoDTO);
+       /* URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path()
                 .buildAndExpand()
-                .toUri();
-        return ResponseEntity.created(uri).body(responseDTO);
+                .toUri();*/
+        return ResponseEntity.ok(responseDTO);
+        //return ResponseEntity.created(uri).body(responseDTO);
     }
 
     /*@GetMapping

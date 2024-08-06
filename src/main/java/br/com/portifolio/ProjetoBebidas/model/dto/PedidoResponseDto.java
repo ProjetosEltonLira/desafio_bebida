@@ -1,6 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.model.dto;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 public class PedidoResponseDto {
 
@@ -10,7 +11,7 @@ public class PedidoResponseDto {
     private String tipoPedido;
     private String solicitante;
 
-    private Instant momento ;
+    private LocalDateTime dataSolicitacao;
 
     public PedidoResponseDto(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
@@ -60,11 +61,11 @@ public class PedidoResponseDto {
         this.solicitante = solicitante;
     }
 
-    public Instant getMomento() {
-        return momento;
+    public LocalDateTime getDataSolicitacao() {
+        return dataSolicitacao;
     }
 
-    public void setMomento(Instant momento) {
-        this.momento = momento;
+    public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
     }
 }

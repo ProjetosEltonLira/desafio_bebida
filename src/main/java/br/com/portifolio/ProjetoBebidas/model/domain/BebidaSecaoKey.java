@@ -18,7 +18,7 @@ public class BebidaSecaoKey {
     public Secao getSecao() {
         return secao;
     }
-    public void setSecaoId(Secao secao) {
+    public void setSecao(Secao secao) {
         this.secao = secao;
     }
 
@@ -33,5 +33,13 @@ public class BebidaSecaoKey {
     @Override
     public int hashCode() {
         return Objects.hash(bebida, secao);
+    }
+
+    @Override
+    public String toString() {
+        return "BebidaSecaoKey{" +
+                "bebida=" + bebida +
+                ", secao=" + secao +
+                '}';
     }
 }

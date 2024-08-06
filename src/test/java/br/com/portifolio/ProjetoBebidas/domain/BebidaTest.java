@@ -1,4 +1,4 @@
-package br.com.portifolio.ProjetoBebidas.entities;
+package br.com.portifolio.ProjetoBebidas.domain;
 
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import org.junit.jupiter.api.BeforeEach;

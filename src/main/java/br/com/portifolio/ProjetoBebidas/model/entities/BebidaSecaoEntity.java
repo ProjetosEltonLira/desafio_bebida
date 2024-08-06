@@ -1,7 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
 
 import br.com.portifolio.ProjetoBebidas.model.entities.pk.BebidaSecaoKey;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class BebidaSecaoEntity implements Serializable {
 
     @EmbeddedId
-    private BebidaSecaoKey id = new BebidaSecaoKey();
+    public BebidaSecaoKey id = new BebidaSecaoKey();
 
     private Double quantidade;
 
@@ -27,16 +27,14 @@ public class BebidaSecaoEntity implements Serializable {
     public BebidaSecaoKey getId() {
         return id;
     }
-
     public void setId(BebidaSecaoKey id) {
         this.id = id;
     }
 
-    @JsonIgnore
+
     public BebidaEntity getBebida() {
         return id.getBebida();
     }
-
     public void setBebida(BebidaEntity bebidaEntity) {
         this.id.setBebida(bebidaEntity);
     }
@@ -44,7 +42,6 @@ public class BebidaSecaoEntity implements Serializable {
     public SecaoEntity getSecao() {
         return id.getSecao();
     }
-
     public void setSecao(SecaoEntity secaoEntity) {
         this.id.setSecaoId(secaoEntity);
     }
@@ -52,7 +49,6 @@ public class BebidaSecaoEntity implements Serializable {
     public Double getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
     }
@@ -67,5 +63,13 @@ public class BebidaSecaoEntity implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "BebidaSecaoEntity{" +
+                "id=" + id +
+                ", quantidade=" + quantidade +
+                '}';
     }
 }

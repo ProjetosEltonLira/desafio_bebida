@@ -1,10 +1,12 @@
 package br.com.portifolio.ProjetoBebidas.config;
 
-import br.com.portifolio.ProjetoBebidas.model.entities.HistoricoEntity;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
 import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.HistoricoRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoRepository;
+import br.com.portifolio.ProjetoBebidas.service.BebidaSecaoService;
+import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -15,17 +17,20 @@ import org.springframework.context.annotation.Profile;
 @Profile("test") //Deve ser igual ao nome que está no arquivo application.properties spring.profiles.active=test
 public class TestConfig implements CommandLineRunner {
 
-    @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
     private BebidaRepository bebidaRepository;
 
-    @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
     private SecaoRepository secaoRepository;
 
-    @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
     private SecaoBebidaRepository secaoBebidaRepository;
 
-    @Autowired //O spring resolve a dependencia entre o TesteConfig e o UserRepository
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
     private HistoricoRepository historicoRepository;
+
+    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Service
+    private BebidaSecaoService bebidaSecaoService;
 
     //CommandLineRunner em tempo de execução, roda o comando abaixo.
     @Override
@@ -55,6 +60,12 @@ public class TestConfig implements CommandLineRunner {
         //HistoricoEntity historico = new HistoricoEntity(1,1,100.0,"ENTRADA","ELTON");
         //historicoRepository.save(historico);
         //System.out.println(historico);
+
+
+        //PedidoDto pedidoDto = new PedidoDto(1,3,100.0,"ENTRADA","ELTON");
+        //bebidaSecaoService.inserirPedido(pedidoDto);
+
+
     }
 }
 

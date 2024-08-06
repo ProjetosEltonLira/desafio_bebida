@@ -2,9 +2,6 @@
 
 package br.com.portifolio.ProjetoBebidas.model.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 import java.time.Instant;
 
 
@@ -71,5 +68,17 @@ public class Histórico {
 
     public void setMomento(Instant momento) {
         this.momento = momento;
+    }
+
+    @Override
+    public String toString() {
+        return "Histórico{" +
+                "secaoId=" + secaoId +
+                ", bebidaId=" + bebidaId +
+                ", quantidade=" + quantidade +
+                ", tipoPedido='" + tipoPedido + '\'' +
+                ", solicitante='" + solicitante + '\'' +
+                ", momento=" + momento +
+                '}';
     }
 }

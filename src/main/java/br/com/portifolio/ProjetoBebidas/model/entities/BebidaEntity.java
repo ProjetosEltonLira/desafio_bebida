@@ -63,4 +63,14 @@ public class BebidaEntity implements Serializable {
     public void setBebidaSessoes(Set<BebidaSecaoEntity> bebidaSessoes) {
         this.bebidaSessoes = bebidaSessoes;
     }
+
+    @Override
+    public String toString() {
+        return "BebidaEntity{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", tipoBebidaEntity=" + tipoBebidaEntity +
+                ", bebidaSessoes=" + bebidaSessoes +
+                '}';
+    }
 }
