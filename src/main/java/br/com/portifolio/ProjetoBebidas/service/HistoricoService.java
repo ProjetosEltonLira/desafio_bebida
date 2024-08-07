@@ -7,16 +7,14 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class HistoricoService {
 
     @Autowired
     private HistoricoRepository repository;
 
-    public HistoricoEntity insert(PedidoDto pedidoDto) {
-        return repository.save(instanciarHistorico(pedidoDto));
+    public void inserir(PedidoDto pedido) {
+        repository.save(instanciarHistorico(pedido));
     }
 
     public HistoricoEntity instanciarHistorico(@NotNull PedidoDto pedidoDto){
@@ -26,5 +24,6 @@ public class HistoricoService {
                 pedidoDto.getQuantidade(),
                 pedidoDto.getTipoPedido(),
                 pedidoDto.getSolicitante());
+
     }
 }

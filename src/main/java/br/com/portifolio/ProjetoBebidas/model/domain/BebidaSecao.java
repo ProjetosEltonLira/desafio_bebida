@@ -1,6 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.model.domain;
 
 import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 
 import java.util.Objects;
@@ -63,6 +64,26 @@ public class BebidaSecao {
             throw new ExceptionError("Não é possível inserir um valor igual ou inferior a 0.0 litros de bebida na sessao");
         }
     }
+    public void calcularQuantidadeBebida(PedidoDto pedido, Double qtdeBebidaExisteNaSecao){
+        if (pedido.getTipoPedido().equals("ENTRADA")){
+            if (qtdeBebidaExisteNaSecao != 0) {
+                setQuantidade(pedido.getQuantidade() + qtdeBebidaExisteNaSecao);
+            }
+        }
+        else if (pedido.getTipoPedido().equals("SAIDA")){
+            if (qtdeBebidaExisteNaSecao >= pedido.getQuantidade()) {
+                setQuantidade(pedido.getQuantidade() + qtdeBebidaExisteNaSecao);
+            }
+            else {
+                throw new ExceptionError("Não é possível retirar mais bebidas do que existe na secao, consultar a quantidade de bebida nessa secao.");
+            }
+        }
+        else {
+            throw new ExceptionError("Tipo de pedido inválido, informar: 'ENTRADA' ou 'SAIDA'");
+        }
+
+    }
+
 
     @Override
     public boolean equals(Object o) {

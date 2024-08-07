@@ -22,66 +22,86 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 @ExtendWith(SpringExtension.class)
 @DisplayName("BebidaSecaoServiceTest")
 public class BebidaSecaoServiceTest {
 
-   @InjectMocks //cria uma instância igual a que uso quando a aplicação executa.
-   private BebidaSecaoService bebidaSecaoService;
+    @InjectMocks //cria uma instância igual a que uso quando a aplicação executa.
+    private BebidaSecaoService bebidaSecaoService;
 
-   @Mock
-   private SecaoService secaoService;
+    @Mock
+    private SecaoService secaoService;
 
-   @Mock
-   private BebidaService bebidaService;
+    @Mock
+    private BebidaService bebidaService;
 
-   @Mock
-   private SecaoBebidaRepository secaoBebidaRepository;
+    @Mock
+    private SecaoBebidaRepository secaoBebidaRepository;
 
-   PedidoDto pedidoDto ;
-   Bebida bebidaAlcoolica;
-   Bebida bebidaSemAlcool;
-   Secao secao;
-   SecaoEntity secaoEntity;
-   BebidaEntity bebidaEntity;
-   TipoBebidaEntity tipoBebidaEntity;
-   BebidaSecaoEntity bebidaSecaoEntity;
+    @Mock
+    private HistoricoService historicoService;
 
+    PedidoDto pedidoDto;
+    Bebida bebidaAlcoolica;
+    Bebida bebidaSemAlcool;
+    Secao secao;
+    SecaoEntity secaoEntity;
+    BebidaEntity bebidaEntity;
+    BebidaEntity bebidaEntity2;
+    TipoBebidaEntity tipoBebidaEntity;
+    BebidaSecaoEntity bebidaSecaoEntity;
 
-   @BeforeEach // executa antes dos testes
-   public void configuracaoInicial() {
-      pedidoDto = new PedidoDto(1,1,100.0,"ENTRADA","ELTON");
-      bebidaAlcoolica = new Bebida(1,"CACHACA", TipoBebidaEnum.ALCOOLICA);
-      bebidaSemAlcool = new Bebida(3,"AGUA", TipoBebidaEnum.SEM_ALCOOL);
+    BebidaSecaoEntity bebidaEncontradaNaSecao;
+    BebidaSecaoEntity bebidaEncontradaNaSecao2;
+    List<BebidaSecaoEntity> listBebidaSecaoEntity = new ArrayList<>();
 
-      tipoBebidaEntity = new TipoBebidaEntity(1,"ALCOOLICA",null);
-      secao = new Secao(1,500.0);
+    @BeforeEach // executa antes dos testes
+    public void configuracaoInicial() {
 
+        pedidoDto = new PedidoDto(1, 1, 100.0, "ENTRADA", "ELTON");
 
-      secaoEntity = new SecaoEntity(1,500.0);
-      bebidaEntity = new BebidaEntity(1,"AGUA", tipoBebidaEntity);
-      bebidaSecaoEntity = new BebidaSecaoEntity(bebidaEntity,secaoEntity,100D);
-   }
+        tipoBebidaEntity = new TipoBebidaEntity(1, "ALCOOLICA", null);
+        secaoEntity = new SecaoEntity(1, 500.0);
+        bebidaEntity = new BebidaEntity(1, "CACHACA", tipoBebidaEntity);
+        bebidaEntity2 = new BebidaEntity(2, "CACHACA VEGANA", tipoBebidaEntity);
+        bebidaSecaoEntity = new BebidaSecaoEntity(bebidaEntity, secaoEntity, 100D);
+        bebidaEncontradaNaSecao = new BebidaSecaoEntity(bebidaEntity, secaoEntity, 150D);
+        bebidaEncontradaNaSecao2 = new BebidaSecaoEntity(bebidaEntity2, secaoEntity, 50D);
+
+        listBebidaSecaoEntity.add(bebidaEncontradaNaSecao);
+        listBebidaSecaoEntity.add(bebidaEncontradaNaSecao2);
+
+    }
 
    @Test
    @DisplayName("Deve inserir uma bebida")
    public void testeInserirPedidoBebida(){
 
-       when(secaoService.findById(any())).thenReturn(secaoEntity);
-       when(bebidaService.findById(any())).thenReturn(bebidaEntity);
-       when(secaoBebidaRepository.findAll()).thenReturn(List.of(bebidaSecaoEntity));
-       when(secaoBebidaRepository.save(any())).thenReturn(bebidaSecaoEntity);
+        when(secaoService.findById(any())).thenReturn(secaoEntity);
+        when(bebidaService.findById(any())).thenReturn(bebidaEntity);
+        when(secaoBebidaRepository.findAll()).thenReturn(List.of(bebidaSecaoEntity));
+        when(secaoBebidaRepository.save(any())).thenReturn(bebidaSecaoEntity);
 
-       PedidoResponseDto pedidoResponseDto = bebidaSecaoService.inserirPedido(pedidoDto);
-       assertEquals(pedidoResponseDto.getQuantidade(),pedidoDto.getQuantidade());
-       assertEquals(pedidoResponseDto.getBebidaId(),pedidoDto.getBebidaId());
-       assertEquals(pedidoResponseDto.getSecaoId(),pedidoDto.getSecaoId());
+        PedidoResponseDto pedidoResponseDto = bebidaSecaoService.inserirPedido(pedidoDto);
+        assertEquals(pedidoResponseDto.getQuantidade(), pedidoDto.getQuantidade());
+        assertEquals(pedidoResponseDto.getBebidaId(), pedidoDto.getBebidaId());
+        assertEquals(pedidoResponseDto.getSecaoId(), pedidoDto.getSecaoId());
+    }
 
-   }
+    @Test
+    @DisplayName("Validar a captura da quantidade existente da bebida a ser inserida na secao teste")
+    public void testeValidarQuantidadeBebidaNaSecao() {
+
+        assertEquals(bebidaSecaoService.getBebidaEncontradaNaSecao(pedidoDto,listBebidaSecaoEntity),150D);
+    }
+
+
 }
