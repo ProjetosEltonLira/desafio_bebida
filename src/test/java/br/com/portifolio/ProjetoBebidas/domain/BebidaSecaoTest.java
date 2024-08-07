@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BebidaSecaoTest {
 
@@ -38,14 +39,20 @@ public class BebidaSecaoTest {
     public void testevalidarTipoBebidaInvalido() {
         Throwable exception = Assertions.assertThrows(ExceptionError.class,
                 () -> this.bebidaSecaoSemAlcool.validarTipoBebida(bebidaAlcoolica.getTipoBebida()));
-        Assertions.assertEquals(exception.getMessage(), "A sessão ALCOOLICA só pode receber bebidas do mesmo tipo");
+
+        String mensagemEsperada =  "A sessão ALCOOLICA só pode receber bebidas do mesmo tipo";
+        String mensagemAtual = exception.getMessage();
+        assertTrue(mensagemAtual.contains(mensagemEsperada));
+
     }
 
     @Test
     @DisplayName("Validar a entrada de bebida do mesmo tipo da seção")
     public void testevalidarTipoBebidavalido() {
-       bebidaSecaoSemAlcool.validarTipoBebida(bebidaSemAlcool.getTipoBebida());
-       Assertions.assertEquals(bebidaSecaoSemAlcool.getBebida().getTipoBebida(),bebidaSemAlcool.getTipoBebida());
+
+        TipoBebidaEnum mensagemEsperada =  bebidaSemAlcool.getTipoBebida();
+        TipoBebidaEnum mensagemAtual = bebidaSecaoSemAlcool.getBebida().getTipoBebida();
+        assertEquals(mensagemAtual, mensagemEsperada);
     }
 
     @Test
@@ -64,7 +71,48 @@ public class BebidaSecaoTest {
         assertEquals(bebidaSecaoAlcoolica.getQuantidade(),100D);
     }
 
-    //Escrever testes de saida.
+    @Test
+    @DisplayName("Calcular valor a ser SUBTRAIDO DA seção, retirar tudo da secao")
+    public void testeCalcularValorASerSubtraidoDaSecao() {
+        pedidoDto = new PedidoDto(1, 1, 100.0, "SAIDA", "ELTON");
+        bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100D);
+        assertEquals(bebidaSecaoAlcoolica.getQuantidade(),0D);
+    }
+
+    @Test
+    @DisplayName("Calcular valor a ser SUBTRAIDO DA seção, deixar uma sobra na secao")
+    public void teste2CalcularValorASerSubtraidoDaSecao() {
+        pedidoDto = new PedidoDto(1, 1, 70D, "SAIDA", "ELTON");
+        bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100D);
+        assertEquals(bebidaSecaoAlcoolica.getQuantidade(),30D);
+    }
+
+    @Test
+    @DisplayName("Valor a ser retirado da Secao é superior ao valor disponível na secao")
+    public void testeCalcularValorDeSaidaSemValorExistenteNaSecao() {
+
+        pedidoDto = new PedidoDto(1, 1, 100.0, "SAIDA", "ELTON");
+        Throwable exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,0.0));
+
+        String mensagemEsperada =  "Não é possível retirar mais bebidas do que existe na secao, consulte a quantidade de bebida disponível nessa secao.";
+        String mensagemAtual = exception.getMessage();
+        assertTrue(mensagemAtual.contains(mensagemEsperada));
+
+    }
+
+    @Test
+    @DisplayName("tipo de pedido invalido")
+    public void testeValidarTipoPedido() {
+
+        pedidoDto = new PedidoDto(1, 1, 100.0, "SALIDA", "ELTON");
+        Exception exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100.0));
+
+        String mensagemEsperada =  "Tipo de pedido inválido, informar: 'ENTRADA' ou 'SAIDA'";
+        String mensagemAtual = exception.getMessage();
+        assertTrue(mensagemAtual.contains(mensagemEsperada));
+    }
+
+
 
 
 

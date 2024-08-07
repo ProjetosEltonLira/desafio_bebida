@@ -72,10 +72,10 @@ public class BebidaSecao {
         }
         else if (pedido.getTipoPedido().equals("SAIDA")){
             if (qtdeBebidaExisteNaSecao >= pedido.getQuantidade()) {
-                setQuantidade(pedido.getQuantidade() + qtdeBebidaExisteNaSecao);
+                setQuantidade(qtdeBebidaExisteNaSecao - pedido.getQuantidade());
             }
             else {
-                throw new ExceptionError("Não é possível retirar mais bebidas do que existe na secao, consultar a quantidade de bebida nessa secao.");
+                throw new ExceptionError("Não é possível retirar mais bebidas do que existe na secao, consulte a quantidade de bebida disponível nessa secao.");
             }
         }
         else {
