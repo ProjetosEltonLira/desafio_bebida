@@ -4,6 +4,7 @@ import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
 import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.BebidaSecao;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
+import br.com.portifolio.ProjetoBebidas.model.domain.TipoBebida;
 import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.junit.jupiter.api.Assertions;
@@ -17,42 +18,52 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BebidaSecaoTest {
 
     Bebida bebidaAlcoolica;
+    Bebida bebidaAlcoolica2;
     Bebida bebidaSemAlcool;
     Secao secao;
     BebidaSecao bebidaSecaoAlcoolica;
+    BebidaSecao bebidaSecaoAlcoolica2;
     BebidaSecao bebidaSecaoSemAlcool;
     PedidoDto pedidoDto;
+    TipoBebida tipoBebidaAlcoolica;
+    TipoBebida tipoBebidaSemAlcool;
 
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {
 
-
-       bebidaAlcoolica = new Bebida(1,"CACHACA", TipoBebidaEnum.ALCOOLICA);
-       bebidaSemAlcool = new Bebida(3,"AGUA", TipoBebidaEnum.SEM_ALCOOL);
-       secao = new Secao(1,500.0);
-       bebidaSecaoAlcoolica = new BebidaSecao(bebidaAlcoolica,secao,100.0);
-       bebidaSecaoSemAlcool = new BebidaSecao(bebidaSemAlcool,secao,100.0);
+        tipoBebidaAlcoolica = new TipoBebida(2,"ALCOOLICA",500D);
+        tipoBebidaSemAlcool = new TipoBebida(1,"SEM_ALCOOL",400D);
+        bebidaAlcoolica = new Bebida(1,"CACHACA",tipoBebidaAlcoolica);
+        bebidaAlcoolica2 = new Bebida(2,"SAQUE",tipoBebidaAlcoolica);
+        bebidaSemAlcool = new Bebida(3,"AGUA",tipoBebidaSemAlcool);
+        secao = new Secao(1);
+        bebidaSecaoAlcoolica = new BebidaSecao(bebidaAlcoolica,secao,100.0);
+        bebidaSecaoAlcoolica2 = new BebidaSecao(bebidaAlcoolica2,secao,100.0);
+        bebidaSecaoSemAlcool = new BebidaSecao(bebidaSemAlcool,secao,100.0);
     }
 
     @Test
     @DisplayName("Não pode inserir bebida de um tipo diferente do que a seção permite")
     public void testevalidarTipoBebidaInvalido() {
         Throwable exception = Assertions.assertThrows(ExceptionError.class,
-                () -> this.bebidaSecaoSemAlcool.validarTipoBebida(bebidaAlcoolica.getTipoBebida()));
+                () -> this.bebidaSecaoAlcoolica.validarTipoBebida(tipoBebidaSemAlcool));
 
-        String mensagemEsperada =  "A sessão ALCOOLICA só pode receber bebidas do mesmo tipo";
+        String mensagemEsperada =  "A sessão SEM_ALCOOL só pode receber bebidas do mesmo tipo";
         String mensagemAtual = exception.getMessage();
         assertTrue(mensagemAtual.contains(mensagemEsperada));
-
     }
 
-    @Test
-    @DisplayName("Validar a entrada de bebida do mesmo tipo da seção")
-    public void testevalidarTipoBebidavalido() {
 
-        TipoBebidaEnum mensagemEsperada =  bebidaSemAlcool.getTipoBebida();
-        TipoBebidaEnum mensagemAtual = bebidaSecaoSemAlcool.getBebida().getTipoBebida();
-        assertEquals(mensagemAtual, mensagemEsperada);
+    @Test
+    @DisplayName("Validar impossibilidade de entrar com valores negativos no pedido")
+    public void testeValidarValoresNegativosNoPedido() {
+
+        pedidoDto = new PedidoDto(1, 1, -400D, "ENTRADA", "ELTON");
+        Throwable exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,0.0));
+
+        String mensagemEsperada = "Não é possível inserir um valor igual ou inferior a 0.0 litros de bebida na sessao";
+        String mensagemAtual = exception.getMessage();
+        assertTrue(mensagemAtual.contains(mensagemEsperada));
     }
 
     @Test
@@ -97,26 +108,17 @@ public class BebidaSecaoTest {
         String mensagemEsperada =  "Não é possível retirar mais bebidas do que existe na secao, consulte a quantidade de bebida disponível nessa secao.";
         String mensagemAtual = exception.getMessage();
         assertTrue(mensagemAtual.contains(mensagemEsperada));
-
     }
 
     @Test
     @DisplayName("tipo de pedido invalido")
     public void testeValidarTipoPedido() {
 
-        pedidoDto = new PedidoDto(1, 1, 100.0, "SALIDA", "ELTON");
+        pedidoDto = new PedidoDto(1, 1, 100.0, "SALIIDDA", "ELTON");
         Exception exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100.0));
 
         String mensagemEsperada =  "Tipo de pedido inválido, informar: 'ENTRADA' ou 'SAIDA'";
         String mensagemAtual = exception.getMessage();
         assertTrue(mensagemAtual.contains(mensagemEsperada));
     }
-
-
-
-
-
-
-
-
 }

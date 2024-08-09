@@ -13,46 +13,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping (value = "/cadastrar")
+@RequestMapping (value = "/gerenciar")
 public class PedidoController {
 
     @Autowired
     private BebidaSecaoService service;
 
-
     @PostMapping
     public ResponseEntity<PedidoResponseDto> insert(@RequestBody PedidoDto pedidoDTO) {
         PedidoResponseDto responseDTO = service.inserirPedido(pedidoDTO);
-       /* URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path()
-                .buildAndExpand()
-                .toUri();*/
         return ResponseEntity.ok(responseDTO);
-        //return ResponseEntity.created(uri).body(responseDTO);
     }
-
-    /*@GetMapping
-    public ResponseEntity<List<BebidaEntity>> findAll() {
-        List<BebidaEntity> list = service.findAll();
-        return ResponseEntity.ok().body(list);
-    }
-
-    @GetMapping (value = "/{id}") // Isso indica que permite receber um valor na URL
-    public ResponseEntity<BebidaEntity> findById(@PathVariable Long id) { // para o Spring aceitar esse valor vindo da URL precisa colocar a notação @PathVariable
-        BebidaEntity bebidaEntity = service.findById(id);
-        return ResponseEntity.ok().body(bebidaEntity);
-    }
-
-
-    @DeleteMapping (value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping (value = "/{id}")
-    public ResponseEntity<ResponsePessoaDTO> update(@PathVariable Long id,@RequestBody EntryPointPessoaDTO pessoaDTO){
-        ResponsePessoaDTO responsePessoaDTO = service.update(id,pessoaDTO);
-        return ResponseEntity.ok().body(responsePessoaDTO);
-    }*/
 }

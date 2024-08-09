@@ -1,11 +1,11 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDto;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
+
+import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
-import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
-import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
+import br.com.portifolio.ProjetoBebidas.repository.TipoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.DataBaseException;
+import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -14,28 +14,27 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BebidaService {
-
-
-    @Autowired
-    private BebidaRepository repository;
+public class TipoBebidaService {
 
     @Autowired
-    private TipoBebidaService tipoBebidaService;
+    private TipoBebidaRepository repository;
 
-    public BebidaEntity inserir(BebidaDto bebidaDto){
+    @Autowired
+    private TipoBebidaService tipoPedidoService;
 
-        TipoBebidaEntity tipoBebidaEntity = tipoBebidaService.findById(bebidaDto.getTipoBebidaId());
-        BebidaEntity bebidaEntity = instanciarBebida(bebidaDto,tipoBebidaEntity);
+    public TipoBebidaEntity insert(TipoBebidaDTO TipoBebidaDto){
 
-        return repository.save(bebidaEntity);
+        TipoBebidaEntity TipoBebida = instanciarTipoBebidaEntity(TipoBebidaDto);
+        repository.save(TipoBebida);
+        return TipoBebida;
     }
 
-    private BebidaEntity instanciarBebida(BebidaDto bebidaDto,TipoBebidaEntity tipoBebidaEntity) {
-        return new BebidaEntity(null,
-                bebidaDto.getNome(),
-                tipoBebidaEntity);
+    private TipoBebidaEntity instanciarTipoBebidaEntity(TipoBebidaDTO tipoBebidaDto) {
+        return new TipoBebidaEntity(tipoBebidaDto.getId(),
+                   tipoBebidaDto.getDescricao(),
+                   tipoBebidaDto.getCapacidade());
     }
+
     public void delete(Long id) {
         try {
             repository.deleteById(id);
@@ -48,11 +47,11 @@ public class BebidaService {
         }
     }
 
-    public BebidaEntity findById(Long id) {
+    public TipoBebidaEntity findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public List<BebidaEntity> findAll() {
+    public List<TipoBebidaEntity> findAll() {
         return repository.findAll();
     }
 }

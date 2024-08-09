@@ -16,6 +16,9 @@ public class TipoBebidaEntity implements Serializable {
     @Column(nullable = false, length = 60)
     private String descricao;
 
+    @Column(name = "capacidade")
+    private Double capacidade;
+
     @JsonIgnore
     @OneToMany(mappedBy = "tipoBebidaEntity")
     private Set<BebidaEntity> bebidaEntities;
@@ -24,9 +27,16 @@ public class TipoBebidaEntity implements Serializable {
     public TipoBebidaEntity(int id){
         this.id = id;
     }
-    public TipoBebidaEntity(int id, String descricao, Set<BebidaEntity> bebidaEntities) {
+    public TipoBebidaEntity(int id, String descricao, Double capacidade) {
         this.id = id;
         this.descricao = descricao;
+        this.capacidade = capacidade;
+    }
+
+    public TipoBebidaEntity(int id, String descricao, Double capacidade, Set<BebidaEntity> bebidaEntities) {
+        this.id = id;
+        this.descricao = descricao;
+        this.capacidade = capacidade;
         this.bebidaEntities = bebidaEntities;
     }
 
@@ -46,6 +56,14 @@ public class TipoBebidaEntity implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Double getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(Double capacidade) {
+        this.capacidade = capacidade;
     }
 
     public Set<BebidaEntity> getBebidas() {

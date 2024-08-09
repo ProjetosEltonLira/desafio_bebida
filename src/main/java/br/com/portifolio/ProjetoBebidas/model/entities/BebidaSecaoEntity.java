@@ -65,11 +65,5 @@ public class BebidaSecaoEntity implements Serializable {
         return Objects.hash(getId());
     }
 
-    @Override
-    public String toString() {
-        return "BebidaSecaoEntity{" +
-                "id=" + id +
-                ", quantidade=" + quantidade +
-                '}';
-    }
+
 }

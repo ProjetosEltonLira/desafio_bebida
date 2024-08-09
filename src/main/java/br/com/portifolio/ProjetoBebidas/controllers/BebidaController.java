@@ -18,7 +18,7 @@ public class BebidaController {
     @Autowired
     private BebidaService service;
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<BebidaEntity> insert(@RequestBody BebidaEntity bebidaEntityEntry){
         BebidaEntity bebidaEntity = service.insert(bebidaEntityEntry);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -38,7 +38,7 @@ public class BebidaController {
     public ResponseEntity<BebidaEntity> findById(@PathVariable Long id) { // para o Spring aceitar esse valor vindo da URL precisa colocar a notação @PathVariable
         BebidaEntity bebidaEntity = service.findById(id);
         return ResponseEntity.ok().body(bebidaEntity);
-    }
+    }*/
 
 
     /*@DeleteMapping (value = "/{id}")

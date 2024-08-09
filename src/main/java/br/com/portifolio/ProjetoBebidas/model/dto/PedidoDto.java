@@ -10,7 +10,7 @@ public class PedidoDto {
     private String tipoPedido;
     private String solicitante;
 
-    private Instant momento ;
+    private Instant DataSolicitacao;
 
     public PedidoDto(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
@@ -60,11 +60,11 @@ public class PedidoDto {
         this.solicitante = solicitante;
     }
 
-    public Instant getMomento() {
-        return momento;
+    public Instant getDataSolicitacao() {
+        return DataSolicitacao;
     }
 
-    public void setMomento(Instant momento) {
-        this.momento = momento;
+    public void setDataSolicitacao(Instant dataSolicitacao) {
+        this.DataSolicitacao = dataSolicitacao;
     }
 }

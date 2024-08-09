@@ -13,11 +13,6 @@ public class SecaoService {
     @Autowired
     private SecaoRepository repository;
 
-    /*public secaoEntity insert(PedidoDTO pedidoDTO){
-        repository.save(secaoEntity);
-        return secaoEntity;
-    }*/
-
     public SecaoEntity findById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
@@ -26,17 +21,4 @@ public class SecaoService {
          return repository.save(secaoEntity);
     }
 
-    public SecaoEntity AtualizarCapacidadeSecao(SecaoEntity secaoEntity, TipoBebidaEnum tipoBebida) {
-        return repository.save(ajustarCapacidadeSecao(secaoEntity,tipoBebida));
-    }
-
-
-    public SecaoEntity ajustarCapacidadeSecao (SecaoEntity secaoEntity,TipoBebidaEnum tipoBebida){
-        if (tipoBebida.equals(TipoBebidaEnum.ALCOOLICA))
-            secaoEntity.setCapacidade(500.0);
-        else { //Sem alcool
-            secaoEntity.setCapacidade(400.0);
-        }
-        return secaoEntity;
-    }
 }

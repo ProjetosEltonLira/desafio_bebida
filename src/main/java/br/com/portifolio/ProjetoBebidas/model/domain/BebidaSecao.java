@@ -52,19 +52,17 @@ public class BebidaSecao {
         this.quantidade = quantidade;
     }
 
-    public void validarTipoBebida(TipoBebidaEnum tipoBebidaSecao) throws ExceptionError {
-        TipoBebidaEnum tipoBebidaPedido = TipoBebidaEnum.getCodigo(id.getBebida().getTipoBebida().getCodigo());
+    public void validarTipoBebida(TipoBebida tipoBebidaExistenteNaSecao) throws ExceptionError {
 
-        if (tipoBebidaSecao != tipoBebidaPedido) {
-            throw new ExceptionError("A sessão " + tipoBebidaSecao + " só pode receber bebidas do mesmo tipo");
-        }
-    }
-    public void validarQtdeBebidaSolicitada() throws ExceptionError {
-        if (quantidade < 0D) {
-            throw new ExceptionError("Não é possível inserir um valor igual ou inferior a 0.0 litros de bebida na sessao");
+        if (id.getBebida().getTipoBebida().getId() != tipoBebidaExistenteNaSecao.getId()) {
+            throw new ExceptionError("A sessão " + tipoBebidaExistenteNaSecao.getDescricao() + " só pode receber bebidas do mesmo tipo");
         }
     }
     public void calcularQuantidadeBebida(PedidoDto pedido, Double qtdeBebidaExisteNaSecao){
+        if (pedido.getQuantidade() < 0D) {
+            throw new ExceptionError("Não é possível inserir um valor igual ou inferior a 0.0 litros de bebida na sessao");
+        }
+
         if (pedido.getTipoPedido().equals("ENTRADA")){
             if (qtdeBebidaExisteNaSecao != 0) {
                 setQuantidade(pedido.getQuantidade() + qtdeBebidaExisteNaSecao);

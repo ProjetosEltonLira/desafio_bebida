@@ -95,16 +95,5 @@ public class HistoricoEntity {
         this.momento = momento;
     }
 
-    @Override
-    public String toString() {
-        return "Historico{" +
-                "id=" + id +
-                ", secaoId=" + secaoId +
-                ", bebidaId=" + bebidaId +
-                ", quantidade=" + quantidade +
-                ", tipoPedido='" + tipoPedido + '\'' +
-                ", solicitante='" + solicitante + '\'' +
-                ", momento=" + momento +
-                '}';
-    }
+
 }

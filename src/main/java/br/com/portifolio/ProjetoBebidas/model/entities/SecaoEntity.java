@@ -14,17 +14,14 @@ public class SecaoEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "capacidade")
-    private Double capacidade;
-
     @JsonIgnore
     @OneToMany(mappedBy = "id.secaoEntity")
     private Set<BebidaSecaoEntity> bebidaSessoes;
 
     public SecaoEntity(){}
-    public SecaoEntity(Integer id, Double capacidade) {
+    public SecaoEntity(Integer id) {
         this.id = id;
-        this.capacidade = capacidade;
+
         //this.bebidaSessoes = bebidaSessoes;
     }
 
@@ -35,14 +32,6 @@ public class SecaoEntity implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Double getCapacidade() {
-        return capacidade;
-    }
-
-    public void setCapacidade(Double capacidade) {
-        this.capacidade = capacidade;
     }
 
     public Set<BebidaSecaoEntity> getBebidaSessoes() {

@@ -6,13 +6,13 @@ public class Bebida {
 
     private Integer id;
     private String nome;
-    private TipoBebidaEnum tipoBebidaEnum;
+    private TipoBebida tipoBebida;
 
     public Bebida(){}
-    public Bebida(Integer id, String nome, TipoBebidaEnum tipoBebidaEnum) {
+    public Bebida(Integer id, String nome, TipoBebida tipoBebida) {
         this.id = id;
         this.nome = nome;
-        this.tipoBebidaEnum = tipoBebidaEnum;
+        this.tipoBebida = tipoBebida;
         //this.bebidaSessoes = bebidaSessoes;
     }
     // Getters and Setters
@@ -32,22 +32,20 @@ public class Bebida {
         this.nome = nome;
     }
 
-    public TipoBebidaEnum getTipoBebida() {
-        return tipoBebidaEnum;
+    public TipoBebida getTipoBebida() {
+        return tipoBebida;
     }
 
-    public void setTipoBebida(TipoBebidaEnum tipoBebidaEnum) {
-        this.tipoBebidaEnum = tipoBebidaEnum;
+    public void setTipoBebida(TipoBebida tipoBebida) {
+        this.tipoBebida = tipoBebida;
     }
-
-
 
     @Override
     public String toString() {
         return "Bebida{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", tipoBebidaEnum=" + tipoBebidaEnum +
+                ", tipoBebidam=" + tipoBebida +
                 '}';
     }
 

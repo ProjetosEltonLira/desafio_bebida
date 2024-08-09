@@ -1,12 +1,10 @@
 package br.com.portifolio.ProjetoBebidas.config;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
 import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.HistoricoRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoRepository;
 import br.com.portifolio.ProjetoBebidas.service.BebidaSecaoService;
-import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;

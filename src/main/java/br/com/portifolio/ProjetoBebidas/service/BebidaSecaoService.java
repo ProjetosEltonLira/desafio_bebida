@@ -10,6 +10,7 @@ import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDto;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecaoEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
+import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import org.jetbrains.annotations.NotNull;
@@ -49,15 +50,11 @@ public class BebidaSecaoService {
         List<BebidaSecaoEntity> listBebidaSecao = findAll().stream().filter(x -> x.getSecao().getId()== pedidoDto.getSecaoId()).toList();
 
         boolean existeBebidaNaSecao = listBebidaSecao.size() > 0;
-        if (!existeBebidaNaSecao){
-            secaoService.AtualizarCapacidadeSecao(secaoEnt,TipoBebidaEnum.getCodigo(bebidaPedido.getTipoBebida().getCodigo()));
-        }
-        bebidaSecaoPedido.validarQtdeBebidaSolicitada();
         if (existeBebidaNaSecao) {
             Double somaQtdeBebidaNaSecao = listBebidaSecao.stream().mapToDouble(BebidaSecaoEntity::getQuantidade).sum();
-            secaoPedido.validarDisponibilidadeArmazenamento(somaQtdeBebidaNaSecao,pedidoDto.getQuantidade());
+            bebidaPedido.getTipoBebida().validarDisponibilidadeArmazenamento(somaQtdeBebidaNaSecao,pedidoDto.getQuantidade());
 
-            TipoBebidaEnum tipoBebidaExisteNaSecao = TipoBebidaEnum.getCodigo(listBebidaSecao.get(0).getBebida().getId());
+            TipoBebida tipoBebidaExisteNaSecao =  instanciarTipoBebida(listBebidaSecao.get(0).getBebida().getTipoBebida());
             bebidaSecaoPedido.validarTipoBebida(tipoBebidaExisteNaSecao);
         }
 
@@ -71,7 +68,7 @@ public class BebidaSecaoService {
 
 
 
-    public double getBebidaEncontradaNaSecao(PedidoDto pedidoDto, List<BebidaSecaoEntity> listBebidaSecao) {
+    public Double getBebidaEncontradaNaSecao(PedidoDto pedidoDto, List<BebidaSecaoEntity> listBebidaSecao) {
         return listBebidaSecao.stream().filter(y -> y.getBebida().getId() == pedidoDto.getBebidaId()).findFirst().get().getQuantidade();
     }
 
@@ -90,30 +87,34 @@ public class BebidaSecaoService {
 
     public Secao instanciarSecao(SecaoEntity secao) {
         return new Secao(
-                secao.getId(),
-                secao.getCapacidade());
+                secao.getId());
     }
 
-    public SecaoEntity instanciarSecao(Secao secao) {
+    public SecaoEntity instanciarSecaoEntity(Secao secao) {
         return new SecaoEntity(
-                secao.getId(),
-                secao.getCapacidade());
+                secao.getId());
     }
     public Bebida instanciarBebida(BebidaEntity bebida) {
         return new Bebida(
                 bebida.getId(),
                 bebida.getNome(),
-                TipoBebidaEnum.valueOf(bebida.getTipoBebida().getDescricao()));
+                instanciarTipoBebida(bebida.getTipoBebida()));
     }
 
-   public BebidaSecao instanciarBebida(BebidaSecaoEntity bs) {
+    public TipoBebida instanciarTipoBebida(TipoBebidaEntity tipoBebidaEntity) {
+        return new TipoBebida(
+                tipoBebidaEntity.getId(),
+                tipoBebidaEntity.getDescricao(),
+                tipoBebidaEntity.getCapacidade());
+    }
+
+   /*public BebidaSecao instanciarBebida(BebidaSecaoEntity bs) {
        TipoBebidaEnum tipoBebidaEnum = TipoBebidaEnum.getCodigo(bs.getBebida().getTipoBebida().getId());
        return new BebidaSecao(
                        new Bebida(bs.getBebida().getId(),
                                   bs.getBebida().getNome(),tipoBebidaEnum),
-                       new Secao(bs.getSecao().getId()
-                                ,bs.getSecao().getCapacidade()),bs.getQuantidade());
-    }
+                       new Secao(bs.getSecao().getId(),bs.getQuantidade());
+    }*/
     /*
     public BebidaSecao instanciarBebidaSecao(List<BebidaSecaoEntity> bebidaSecaoEntity) {
         BebidaSecao bebidaSecao = new BebidaSecao();
