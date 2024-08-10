@@ -26,10 +26,6 @@ import static org.mockito.Mockito.when;
 public class BebidaServiceTest {
 
     @InjectMocks //cria uma instância igual a que uso quando a aplicação executa.
-    private BebidaService bebidaSecaoService;
-
-
-    @Mock
     private BebidaService bebidaService;
 
     @Mock
@@ -48,23 +44,23 @@ public class BebidaServiceTest {
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {
 
-        bebidaDto = new BebidaDto(1,"51 uma boa escolha",1);
+        bebidaDto = new BebidaDto(1,"51 uma boa escolha",2);
         tipoBebidaEntity = new TipoBebidaEntity(2, "ALCOOLICA", 500D);
-        bebidaEntity = new BebidaEntity(1, "51 uma boa escolha", tipoBebidaEntity);
+        bebidaEntity = new BebidaEntity(1L, "51 uma boa escolha", tipoBebidaEntity);
+
     }
 
     @Test
     @DisplayName("Deve inserir uma bebida")
     public void testeInserirBebida(){
 
-        when(bebidaService.findById(any())).thenReturn(bebidaEntity);
-        when(bebidaRepository.save(any())).thenReturn(bebidaEntity);
         when(tipoBebidaService.findById(any())).thenReturn(tipoBebidaEntity);
+        when(bebidaRepository.save(any())).thenReturn(bebidaEntity);
+        BebidaEntity retornoBebidaEntity = bebidaService.inserir(bebidaDto);
 
-        BebidaEntity bebidaEntity = bebidaService.inserir(bebidaDto);
-        assertEquals(bebidaDto.getId(), Optional.ofNullable(bebidaEntity.getId()));
-        assertEquals(bebidaDto.getNome(), bebidaEntity.getNome());
-        assertEquals(bebidaDto.getTipoBebidaId(), bebidaEntity.getTipoBebida().getId());
+        assertEquals(retornoBebidaEntity.getId(),bebidaDto.getId());
+        assertEquals(retornoBebidaEntity.getNome(),bebidaDto.getNome());
+        assertEquals(retornoBebidaEntity.getTipoBebida().getId(),bebidaDto.getTipoBebidaId());
     }
 
     @Test

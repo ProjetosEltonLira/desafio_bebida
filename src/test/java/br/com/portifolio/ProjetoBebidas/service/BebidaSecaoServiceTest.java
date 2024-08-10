@@ -69,8 +69,8 @@ public class BebidaSecaoServiceTest {
         pedidoDto = new PedidoDto(1, 1, 100.0, "ENTRADA", "ELTON");
 
         tipoBebidaEntity = new TipoBebidaEntity(1, "ALCOOLICA", 500D);
-        bebidaEntity = new BebidaEntity(1, "CACHACA", tipoBebidaEntity);
-        bebidaEntity2 = new BebidaEntity(2, "CACHACA VEGANA", tipoBebidaEntity);
+        bebidaEntity = new BebidaEntity(1L, "CACHACA", tipoBebidaEntity);
+        bebidaEntity2 = new BebidaEntity(2L, "CACHACA VEGANA", tipoBebidaEntity);
         secaoEntity = new SecaoEntity(1);
         bebidaSecaoEntity = new BebidaSecaoEntity(bebidaEntity, secaoEntity, 100D);
         bebidaEncontradaNaSecao = new BebidaSecaoEntity(bebidaEntity, secaoEntity, 150D);

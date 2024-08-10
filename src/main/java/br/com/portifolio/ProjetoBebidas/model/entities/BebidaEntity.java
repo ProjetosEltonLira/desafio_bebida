@@ -10,7 +10,7 @@ public class BebidaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(length = 60)
     private String nome;
@@ -24,7 +24,7 @@ public class BebidaEntity implements Serializable {
     private Set<BebidaSecaoEntity> bebidaSessoes;
 
     public BebidaEntity(){}
-    public BebidaEntity(Integer id, String nome, TipoBebidaEntity tipoBebidaEntity) {
+    public BebidaEntity(Long id, String nome, TipoBebidaEntity tipoBebidaEntity) {
         this.id = id;
         this.nome = nome;
         this.tipoBebidaEntity = tipoBebidaEntity;
@@ -32,11 +32,11 @@ public class BebidaEntity implements Serializable {
     }
 
     // Getters and Setters
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

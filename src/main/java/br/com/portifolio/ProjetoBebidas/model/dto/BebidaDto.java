@@ -4,23 +4,23 @@ package br.com.portifolio.ProjetoBebidas.model.dto;
 
 public class BebidaDto {
 
-    private long Id;
+    private long id;
     private String nome;
     private long tipoBebidaId;
 
     public BebidaDto() {}
     public BebidaDto(long id, String nome, long tipoBebidaId) {
-        Id = id;
-        nome = nome;
-        tipoBebidaId = tipoBebidaId;
+        this.id = id;
+        this.nome = nome;
+        this.tipoBebidaId = tipoBebidaId;
     }
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNome() {

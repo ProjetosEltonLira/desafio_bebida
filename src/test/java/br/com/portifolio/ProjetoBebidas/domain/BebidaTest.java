@@ -18,8 +18,8 @@ public class BebidaTest {
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {
       tipoBebida = new TipoBebida(1,"ALCOOLICA",500D);
-      bebida = new Bebida(1,"CACHACA",tipoBebida);
-      bebida2.setId(1);
+      bebida = new Bebida(1L,"CACHACA",tipoBebida);
+      bebida2.setId(1L);
       bebida2.setNome("ALOOLICA");
       bebida2.setTipoBebida(tipoBebida);
 

@@ -33,8 +33,8 @@ public class TipoBebidaTest {
 
         tipoBebidaAlcoolica = new TipoBebida(2, "ALCOOLICA", 500D);
         tipoBebidaSemAlcool = new TipoBebida(1, "SEM_ALCOOL", 400D);
-        bebidaAlcoolica = new Bebida(1, "CACHACA", tipoBebidaAlcoolica);
-        bebidaSemAlcool = new Bebida(3, "AGUA", tipoBebidaSemAlcool);
+        bebidaAlcoolica = new Bebida(1L, "CACHACA", tipoBebidaAlcoolica);
+        bebidaSemAlcool = new Bebida(3L, "AGUA", tipoBebidaSemAlcool);
         secao = new Secao(1);
         bebidaSecaoAlcoolica = new BebidaSecao(bebidaAlcoolica, secao, 100.0);
         bebidaSecaoSemAlcool = new BebidaSecao(bebidaSemAlcool, secao, 100.0);

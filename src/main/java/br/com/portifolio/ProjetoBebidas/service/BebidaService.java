@@ -32,7 +32,7 @@ public class BebidaService {
     }
 
     private BebidaEntity instanciarBebida(BebidaDto bebidaDto,TipoBebidaEntity tipoBebidaEntity) {
-        return new BebidaEntity(null,
+        return new BebidaEntity(bebidaDto.getId(),
                 bebidaDto.getNome(),
                 tipoBebidaEntity);
     }

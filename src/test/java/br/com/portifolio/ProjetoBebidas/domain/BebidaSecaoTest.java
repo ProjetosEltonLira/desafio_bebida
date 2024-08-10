@@ -33,9 +33,9 @@ public class BebidaSecaoTest {
 
         tipoBebidaAlcoolica = new TipoBebida(2,"ALCOOLICA",500D);
         tipoBebidaSemAlcool = new TipoBebida(1,"SEM_ALCOOL",400D);
-        bebidaAlcoolica = new Bebida(1,"CACHACA",tipoBebidaAlcoolica);
-        bebidaAlcoolica2 = new Bebida(2,"SAQUE",tipoBebidaAlcoolica);
-        bebidaSemAlcool = new Bebida(3,"AGUA",tipoBebidaSemAlcool);
+        bebidaAlcoolica = new Bebida(1L,"CACHACA",tipoBebidaAlcoolica);
+        bebidaAlcoolica2 = new Bebida(2L,"SAQUE",tipoBebidaAlcoolica);
+        bebidaSemAlcool = new Bebida(3L,"AGUA",tipoBebidaSemAlcool);
         secao = new Secao(1);
         bebidaSecaoAlcoolica = new BebidaSecao(bebidaAlcoolica,secao,100.0);
         bebidaSecaoAlcoolica2 = new BebidaSecao(bebidaAlcoolica2,secao,100.0);
