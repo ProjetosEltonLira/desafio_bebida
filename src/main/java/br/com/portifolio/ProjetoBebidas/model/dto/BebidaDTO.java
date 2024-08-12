@@ -2,14 +2,14 @@ package br.com.portifolio.ProjetoBebidas.model.dto;
 
 
 
-public class BebidaDto {
+public class BebidaDTO {
 
     private long id;
     private String nome;
     private long tipoBebidaId;
 
-    public BebidaDto() {}
-    public BebidaDto(long id, String nome, long tipoBebidaId) {
+    public BebidaDTO() {}
+    public BebidaDTO(long id, String nome, long tipoBebidaId) {
         this.id = id;
         this.nome = nome;
         this.tipoBebidaId = tipoBebidaId;

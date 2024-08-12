@@ -1,21 +1,18 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
 import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.BebidaSecao;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
 import br.com.portifolio.ProjetoBebidas.model.domain.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecaoEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +32,7 @@ public class BebidaSecaoService {
     @Autowired
     private HistoricoService historicoService;
 
-    public  PedidoResponseDto inserirPedido(PedidoDto pedidoDto) throws ExceptionError {
+    public PedidoResponseDTO inserirPedido(PedidoDTO pedidoDto) throws ExceptionError {
 
         SecaoEntity secaoEnt = secaoService.findById(pedidoDto.getSecaoId());
         Secao secaoPedido = instanciarSecao(secaoEnt);
@@ -68,7 +65,7 @@ public class BebidaSecaoService {
 
 
 
-    public Double getBebidaEncontradaNaSecao(PedidoDto pedidoDto, List<BebidaSecaoEntity> listBebidaSecao) {
+    public Double getBebidaEncontradaNaSecao(PedidoDTO pedidoDto, List<BebidaSecaoEntity> listBebidaSecao) {
         return listBebidaSecao.stream().filter(y -> y.getBebida().getId() == pedidoDto.getBebidaId()).findFirst().get().getQuantidade();
     }
 
@@ -76,8 +73,8 @@ public class BebidaSecaoService {
         return secaoBebidaRepository.findAll();
     }
 
-    public PedidoResponseDto instanciarResponseDto(BebidaSecaoEntity bebida,PedidoDto pedido) {
-        return new PedidoResponseDto(
+    public PedidoResponseDTO instanciarResponseDto(BebidaSecaoEntity bebida, PedidoDTO pedido) {
+        return new PedidoResponseDTO(
                 bebida.getSecao().getId(),
                 bebida.getBebida().getId(),
                 bebida.getQuantidade(),

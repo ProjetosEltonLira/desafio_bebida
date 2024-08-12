@@ -1,9 +1,8 @@
 package br.com.portifolio.ProjetoBebidas.model.dto;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 
-public class PedidoResponseDto {
+public class PedidoResponseDTO {
 
     private long secaoId;
     private long bebidaId;
@@ -13,7 +12,7 @@ public class PedidoResponseDto {
 
     private LocalDateTime dataSolicitacao;
 
-    public PedidoResponseDto(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
+    public PedidoResponseDTO(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
         this.bebidaId = bebidaId;
         this.quantidade = quantidade;

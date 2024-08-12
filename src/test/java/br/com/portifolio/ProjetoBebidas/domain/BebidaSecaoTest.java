@@ -1,11 +1,10 @@
 package br.com.portifolio.ProjetoBebidas.domain;
 
-import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
 import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.BebidaSecao;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
 import br.com.portifolio.ProjetoBebidas.model.domain.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,7 +23,7 @@ public class BebidaSecaoTest {
     BebidaSecao bebidaSecaoAlcoolica;
     BebidaSecao bebidaSecaoAlcoolica2;
     BebidaSecao bebidaSecaoSemAlcool;
-    PedidoDto pedidoDto;
+    PedidoDTO pedidoDto;
     TipoBebida tipoBebidaAlcoolica;
     TipoBebida tipoBebidaSemAlcool;
 
@@ -58,7 +57,7 @@ public class BebidaSecaoTest {
     @DisplayName("Validar impossibilidade de entrar com valores negativos no pedido")
     public void testeValidarValoresNegativosNoPedido() {
 
-        pedidoDto = new PedidoDto(1, 1, -400D, "ENTRADA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, -400D, "ENTRADA", "ELTON");
         Throwable exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,0.0));
 
         String mensagemEsperada = "Não é possível inserir um valor igual ou inferior a 0.0 litros de bebida na sessao";
@@ -69,7 +68,7 @@ public class BebidaSecaoTest {
     @Test
     @DisplayName("Calcular valor a ser adicionado na seção, o valor do pedido + valor existente na secao")
     public void testeCalcularValorDaEntradaMaisValorExistenteNaSecao() {
-        pedidoDto = new PedidoDto(1, 1, 100.0, "ENTRADA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "ENTRADA", "ELTON");
         bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100D);
         assertEquals(bebidaSecaoAlcoolica.getQuantidade(),200D);
     }
@@ -77,7 +76,7 @@ public class BebidaSecaoTest {
     @DisplayName("Calcular valor a ser adicionado na seção, o valor do pedido + 0 valor existente na seção")
     public void testeCalcularValorDaEntradaSemValorExistenteNaSecao() {
 
-        pedidoDto = new PedidoDto(1, 1, 100.0, "ENTRADA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "ENTRADA", "ELTON");
         bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,0.0);
         assertEquals(bebidaSecaoAlcoolica.getQuantidade(),100D);
     }
@@ -85,7 +84,7 @@ public class BebidaSecaoTest {
     @Test
     @DisplayName("Calcular valor a ser SUBTRAIDO DA seção, retirar tudo da secao")
     public void testeCalcularValorASerSubtraidoDaSecao() {
-        pedidoDto = new PedidoDto(1, 1, 100.0, "SAIDA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "SAIDA", "ELTON");
         bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100D);
         assertEquals(bebidaSecaoAlcoolica.getQuantidade(),0D);
     }
@@ -93,7 +92,7 @@ public class BebidaSecaoTest {
     @Test
     @DisplayName("Calcular valor a ser SUBTRAIDO DA seção, deixar uma sobra na secao")
     public void teste2CalcularValorASerSubtraidoDaSecao() {
-        pedidoDto = new PedidoDto(1, 1, 70D, "SAIDA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 70D, "SAIDA", "ELTON");
         bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100D);
         assertEquals(bebidaSecaoAlcoolica.getQuantidade(),30D);
     }
@@ -102,7 +101,7 @@ public class BebidaSecaoTest {
     @DisplayName("Valor a ser retirado da Secao é superior ao valor disponível na secao")
     public void testeCalcularValorDeSaidaSemValorExistenteNaSecao() {
 
-        pedidoDto = new PedidoDto(1, 1, 100.0, "SAIDA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "SAIDA", "ELTON");
         Throwable exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,0.0));
 
         String mensagemEsperada =  "Não é possível retirar mais bebidas do que existe na secao, consulte a quantidade de bebida disponível nessa secao.";
@@ -114,7 +113,7 @@ public class BebidaSecaoTest {
     @DisplayName("tipo de pedido invalido")
     public void testeValidarTipoPedido() {
 
-        pedidoDto = new PedidoDto(1, 1, 100.0, "SALIIDDA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "SALIIDDA", "ELTON");
         Exception exception = Assertions.assertThrows(ExceptionError.class,() -> bebidaSecaoAlcoolica.calcularQuantidadeBebida(pedidoDto,100.0));
 
         String mensagemEsperada =  "Tipo de pedido inválido, informar: 'ENTRADA' ou 'SAIDA'";

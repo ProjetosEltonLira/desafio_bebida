@@ -1,7 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
 
-import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.repository.BebidaRepository;
@@ -12,10 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -37,14 +35,14 @@ public class BebidaServiceTest {
     @Mock
     private TipoBebidaService tipoBebidaService;
 
-    BebidaDto bebidaDto;
+    BebidaDTO bebidaDto;
     BebidaEntity bebidaEntity;
     TipoBebidaEntity tipoBebidaEntity;
 
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {
 
-        bebidaDto = new BebidaDto(1,"51 uma boa escolha",2);
+        bebidaDto = new BebidaDTO(1,"51 uma boa escolha",2);
         tipoBebidaEntity = new TipoBebidaEntity(2, "ALCOOLICA", 500D);
         bebidaEntity = new BebidaEntity(1L, "51 uma boa escolha", tipoBebidaEntity);
 

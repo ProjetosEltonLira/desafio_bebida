@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
@@ -23,7 +23,7 @@ public class BebidaService {
     @Autowired
     private TipoBebidaService tipoBebidaService;
 
-    public BebidaEntity inserir(BebidaDto bebidaDto){
+    public BebidaEntity inserir(BebidaDTO bebidaDto){
 
         TipoBebidaEntity tipoBebidaEntity = tipoBebidaService.findById(bebidaDto.getTipoBebidaId());
         BebidaEntity bebidaEntity = instanciarBebida(bebidaDto,tipoBebidaEntity);
@@ -31,7 +31,7 @@ public class BebidaService {
         return repository.save(bebidaEntity);
     }
 
-    private BebidaEntity instanciarBebida(BebidaDto bebidaDto,TipoBebidaEntity tipoBebidaEntity) {
+    private BebidaEntity instanciarBebida(BebidaDTO bebidaDto, TipoBebidaEntity tipoBebidaEntity) {
         return new BebidaEntity(bebidaDto.getId(),
                 bebidaDto.getNome(),
                 tipoBebidaEntity);

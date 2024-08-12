@@ -1,16 +1,14 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.Enum.TipoBebidaEnum;
 import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDto;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecaoEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,12 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 @ExtendWith(SpringExtension.class)
@@ -49,7 +45,7 @@ public class BebidaSecaoServiceTest {
     @Mock
     private HistoricoService historicoService;
 
-    PedidoDto pedidoDto;
+    PedidoDTO pedidoDto;
     Bebida bebidaAlcoolica;
     Bebida bebidaSemAlcool;
     Secao secao;
@@ -66,7 +62,7 @@ public class BebidaSecaoServiceTest {
     @BeforeEach // executa antes dos testes
     public void configuracaoInicial() {
 
-        pedidoDto = new PedidoDto(1, 1, 100.0, "ENTRADA", "ELTON");
+        pedidoDto = new PedidoDTO(1, 1, 100.0, "ENTRADA", "ELTON");
 
         tipoBebidaEntity = new TipoBebidaEntity(1, "ALCOOLICA", 500D);
         bebidaEntity = new BebidaEntity(1L, "CACHACA", tipoBebidaEntity);
@@ -90,7 +86,7 @@ public class BebidaSecaoServiceTest {
         when(secaoBebidaRepository.findAll()).thenReturn(List.of(bebidaSecaoEntity));
         when(secaoBebidaRepository.save(any())).thenReturn(bebidaSecaoEntity);
 
-        PedidoResponseDto pedidoResponseDto = bebidaSecaoService.inserirPedido(pedidoDto);
+        PedidoResponseDTO pedidoResponseDto = bebidaSecaoService.inserirPedido(pedidoDto);
         assertEquals(pedidoResponseDto.getQuantidade(), pedidoDto.getQuantidade());
         assertEquals(pedidoResponseDto.getBebidaId(), pedidoDto.getBebidaId());
         assertEquals(pedidoResponseDto.getSecaoId(), pedidoDto.getSecaoId());

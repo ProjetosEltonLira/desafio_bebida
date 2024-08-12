@@ -19,20 +19,23 @@ public class TipoBebidaService {
     @Autowired
     private TipoBebidaRepository repository;
 
-    @Autowired
-    private TipoBebidaService tipoPedidoService;
+    public TipoBebidaDTO inserir(TipoBebidaDTO TipoBebidaDto){
 
-    public TipoBebidaEntity insert(TipoBebidaDTO TipoBebidaDto){
-
-        TipoBebidaEntity TipoBebida = instanciarTipoBebidaEntity(TipoBebidaDto);
-        repository.save(TipoBebida);
-        return TipoBebida;
+        TipoBebidaEntity TipoBebidaEntity = mapearTipoBebidaEntity(TipoBebidaDto);
+        repository.save(TipoBebidaEntity);
+        return mapearTipoBebidaDTO(TipoBebidaEntity);
     }
 
-    private TipoBebidaEntity instanciarTipoBebidaEntity(TipoBebidaDTO tipoBebidaDto) {
+    private TipoBebidaEntity mapearTipoBebidaEntity(TipoBebidaDTO tipoBebidaDto) {
         return new TipoBebidaEntity(tipoBebidaDto.getId(),
                    tipoBebidaDto.getDescricao(),
                    tipoBebidaDto.getCapacidade());
+    }
+
+    private TipoBebidaDTO mapearTipoBebidaDTO(TipoBebidaEntity tipoBebidaEntity) {
+        return new TipoBebidaDTO(tipoBebidaEntity.getId(),
+                tipoBebidaEntity.getDescricao(),
+                tipoBebidaEntity.getCapacidade());
     }
 
     public void delete(Long id) {
@@ -51,7 +54,25 @@ public class TipoBebidaService {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    public TipoBebidaDTO pesquisarPorId(Long id) {
+       TipoBebidaEntity tipoBebidaEntity = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+       return mapearTipoBebidaDTO(tipoBebidaEntity);
+    }
+
     public List<TipoBebidaEntity> findAll() {
         return repository.findAll();
+    }
+
+    public void update(Long id, TipoBebidaDTO tipoBebidaDTO) {
+        if(repository.existsById(id)){
+            TipoBebidaEntity tipoBebidaEntity = new TipoBebidaEntity(
+                    tipoBebidaDTO.getId(),
+                    tipoBebidaDTO.getDescricao(),
+                    tipoBebidaDTO.getCapacidade());
+            repository.save(tipoBebidaEntity);
+
+        }else {
+            throw new ResourceNotFoundException(tipoBebidaDTO.getId());
+        }
     }
 }

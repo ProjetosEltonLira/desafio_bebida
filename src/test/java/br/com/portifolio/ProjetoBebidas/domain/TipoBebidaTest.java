@@ -4,15 +4,11 @@ import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.BebidaSecao;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
 import br.com.portifolio.ProjetoBebidas.model.domain.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDto;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
