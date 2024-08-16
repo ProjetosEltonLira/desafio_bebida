@@ -1,8 +1,9 @@
 package br.com.portifolio.ProjetoBebidas.model.dto;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class PedidoResponseDTO {
+public class PedidoResponseDTO implements Serializable {
 
     private long secaoId;
     private long bebidaId;

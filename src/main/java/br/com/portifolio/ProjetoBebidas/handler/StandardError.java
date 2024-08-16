@@ -1,9 +1,13 @@
 package br.com.portifolio.ProjetoBebidas.handler;
 
+import br.com.portifolio.ProjetoBebidas.model.dto.ResponseObjectDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 public class StandardError implements Serializable {
 
@@ -12,8 +16,13 @@ public class StandardError implements Serializable {
     private Instant timestamp;
     private Integer status;
     private String error;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
     private String path;
+
+    //@JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<ResponseObjectDTO> errors;
 
     public StandardError(){};
     public StandardError(Instant timestamp, Integer status, String error, String message, String path) {
@@ -22,6 +31,11 @@ public class StandardError implements Serializable {
         this.error = error;
         this.message = message;
         this.path = path;
+    }
+
+    public StandardError(Instant timestamp, Integer status, String error, String message, String path, List<ResponseObjectDTO> errors) {
+        this(timestamp,status,error,message,path);
+        this.errors = errors;
     }
 
     public Instant getTimestamp() {
@@ -62,5 +76,13 @@ public class StandardError implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public List<ResponseObjectDTO> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<ResponseObjectDTO> errors) {
+        this.errors = errors;
     }
 }

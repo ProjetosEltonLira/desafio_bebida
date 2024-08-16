@@ -1,19 +1,22 @@
 package br.com.portifolio.ProjetoBebidas.handler;
 
+import br.com.portifolio.ProjetoBebidas.model.dto.ResponseObjectDTO;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.DataBaseException;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
-import br.com.portifolio.ProjetoBebidas.service.exceptions.StandardError;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ControllerAdvice //isso que vai interceptar as exceções que acontecerem
-public class ResourceExceptionHandler  {
+public class ResourceExceptionHandler {
 
     //Intercepta qualquer exceção do tipo ResourceNotFoundException
     @ExceptionHandler(ResourceNotFoundException.class)
@@ -41,4 +44,20 @@ public class ResourceExceptionHandler  {
         StandardError bodyErro = new StandardError(Instant.now(),httpStatus.value(),msgErro,exception.getMessage(),request.getRequestURI());
         return ResponseEntity.status(httpStatus).body(bodyErro);
     }
+
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest request){
+        String msgErro = "Campo(s) com preenchimento inválido";
+        List<ResponseObjectDTO> errors = exception.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> new ResponseObjectDTO(error.getDefaultMessage(), error.getField().toUpperCase(), error.getRejectedValue())).toList();
+
+        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+        StandardError bodyErro = new StandardError(Instant.now(),httpStatus.value(),msgErro, null, request.getRequestURI(),errors);
+        return ResponseEntity.status(httpStatus).body(bodyErro);
+    }
+
+
 }

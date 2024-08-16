@@ -3,6 +3,7 @@ package br.com.portifolio.ProjetoBebidas.controllers;
 import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.TipoBebidaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +13,11 @@ import java.util.List;
 @RequestMapping (value = "/tipobebida")
 public class TipoBebidaController {
 
-
     @Autowired
     private TipoBebidaService service;
 
     @PostMapping
-    public ResponseEntity<TipoBebidaDTO> inserir(@RequestBody TipoBebidaDTO tipoBebidaDTO) {
+    public ResponseEntity<TipoBebidaDTO> inserir(@Valid @RequestBody TipoBebidaDTO tipoBebidaDTO) {
         TipoBebidaDTO responseDTO = service.inserir(tipoBebidaDTO);
         return ResponseEntity.ok(responseDTO);
     }
