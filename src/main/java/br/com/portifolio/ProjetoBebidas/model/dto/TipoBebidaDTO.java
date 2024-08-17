@@ -1,11 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.model.dto;
 
-import jakarta.validation.constraints.NegativeOrZero;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
-import java.io.Serializable;
+import jakarta.validation.constraints.*;
 
 public class TipoBebidaDTO  {
 
@@ -14,8 +9,7 @@ public class TipoBebidaDTO  {
     @NotBlank(message = "Nome da bebida não pode ser vazio ou preenchido com espaços")
     private String descricao;
 
-    @NotNull(message = "Valor da capacidade não pode ser nulo e deve ser superior a zero.")
-    @Positive(message = "Valor da capacidade não pode ser zero ou negativo.")
+    @Min(value = 1, message = "Valor da capacidade não pode ser zero ou negativo.")
     private Double capacidade;
 
     public TipoBebidaDTO(){};

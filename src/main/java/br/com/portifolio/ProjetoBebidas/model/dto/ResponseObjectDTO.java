@@ -1,20 +1,18 @@
 package br.com.portifolio.ProjetoBebidas.model.dto;
 
-import java.io.Serializable;
-
 public class ResponseObjectDTO {
 
     private String campo;
 
     private String mensagem;
 
-    private Object parametro;
+    private Object valor;
 
     public ResponseObjectDTO(){}
-    public ResponseObjectDTO(String campo, String mensagem, Object parametro) {
+    public ResponseObjectDTO(String campo, String mensagem, Object valor) {
         this.campo = campo;
         this.mensagem = mensagem;
-        this.parametro = parametro;
+        this.valor = valor;
     }
 
     public String getCampo() {
@@ -33,11 +31,11 @@ public class ResponseObjectDTO {
         this.mensagem = mensagem;
     }
 
-    public Object getParametro() {
-        return parametro;
+    public Object getValor() {
+        return valor;
     }
 
-    public void setParametro(Object parametro) {
-        this.parametro = parametro;
+    public void setValor(Object valor) {
+        this.valor = valor;
     }
 }

@@ -49,10 +49,11 @@ public class ResourceExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> methodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest request){
         String msgErro = "Campo(s) com preenchimento inválido";
+        //Percorre a lista de erros que foi recebida
         List<ResponseObjectDTO> errors = exception.getBindingResult()
                 .getFieldErrors()
                 .stream()
-                .map(error -> new ResponseObjectDTO(error.getDefaultMessage(), error.getField().toUpperCase(), error.getRejectedValue())).toList();
+                .map(error -> new ResponseObjectDTO(error.getField().toUpperCase(), error.getDefaultMessage(), error.getRejectedValue())).toList();
 
         HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
         StandardError bodyErro = new StandardError(Instant.now(),httpStatus.value(),msgErro, null, request.getRequestURI(),errors);

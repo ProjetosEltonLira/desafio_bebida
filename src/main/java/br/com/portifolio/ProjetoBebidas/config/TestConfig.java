@@ -14,8 +14,12 @@ import org.springframework.context.annotation.Profile;
 @Configuration //representa uma configuração
 @Profile("test") //Deve ser igual ao nome que está no arquivo application.properties spring.profiles.active=test
 public class TestConfig implements CommandLineRunner {
+    @Override
+    public void run(String... args) throws Exception {
 
-    @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
+    }
+
+    /*@Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
     private BebidaRepository bebidaRepository;
 
     @Autowired //O spring resolve a dependencia entre o TesteConfig e o Repository
@@ -64,7 +68,7 @@ public class TestConfig implements CommandLineRunner {
         //bebidaSecaoService.inserirPedido(pedidoDto);
 
 
-    }
+    }*/
 }
 
 
