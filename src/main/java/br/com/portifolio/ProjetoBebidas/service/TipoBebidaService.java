@@ -40,7 +40,7 @@ public class TipoBebidaService {
 
     public void delete(Long id) {
         try {
-            repository.deleteById(id);
+             repository.deleteById(id);
         }
         catch (EmptyResultDataAccessException e){
             throw new ResourceNotFoundException(id);

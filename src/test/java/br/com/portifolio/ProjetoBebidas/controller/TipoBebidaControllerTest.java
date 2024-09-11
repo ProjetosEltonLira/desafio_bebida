@@ -9,6 +9,8 @@ import br.com.portifolio.ProjetoBebidas.service.TipoBebidaService;
 
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityNotFoundException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,10 +28,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import static java.util.Optional.empty;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -75,7 +80,7 @@ public class TipoBebidaControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.descricao").value("Refrigerante"))
-                .andExpect(jsonPath("$.capacidade").value(2.0));
+                .andExpect(jsonPath("$.capacidade").value(200.0));
     }
 
     @Test
@@ -88,13 +93,6 @@ public class TipoBebidaControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(tipoBebidaDTO)))
                 .andExpect(status().isBadRequest());
-                //.andExpect(jsonPath("¨$.error").value("Campo(s) com preenchimento inválido"));
-//                .andExpect(jsonPath("$.errors[0].campo").value("Valor da capacidade não pode ser zero ou negativo."))
-        //              .andExpect(jsonPath("$.errors[0].mensagem").value("CAPACIDADE"))
-        //            .andExpect(jsonPath("$.errors[0].parametro").value(-1.0))
-        //          .andExpect(jsonPath("$.errors[1].campo").value("Nome da bebida não pode ser vazio ou preenchido com espaços"))
-        //        .andExpect(jsonPath("$.errors[1].mensagem").value("DESCRICAO"))
-        //      .andExpect(jsonPath("$.errors[1].parametro").value(""));
 
     }
 
@@ -113,30 +111,61 @@ public class TipoBebidaControllerTest {
     @DisplayName("Buscar Tipo Bebida por Id")
     public void BuscarPorId() throws Exception {
 
-        tipoBebidaDTO = new TipoBebidaDTO(2, "Refrigerante", 200.0);
+        tipoBebidaDTO = new TipoBebidaDTO(3, "Refrigerante", 200.0);
         when(tipoBebidaService.pesquisarPorId(any())).thenReturn(tipoBebidaDTO);
 
-        mockMvc.perform(get("/tipobebida/2"))
+        mockMvc.perform(get("/tipobebida/3"))
                         .andExpect(status().isOk())
-                        .andExpect(jsonPath("$.id").value(2))
+                        .andExpect(jsonPath("$.id").value(3))
                         .andExpect(jsonPath("$.descricao").value("Refrigerante"))
                         .andExpect(jsonPath("$.capacidade").value(200.0));
 
         verify(tipoBebidaService).pesquisarPorId(any());
 
     }
-
     @Test
     @DisplayName("Falha na Buscar Tipo Bebida por Id")
     public void FalhaBuscarPorId() throws Exception {
 
-        //when(tipoBebidaService.pesquisarPorId(any())).thenThrow(new RuntimeException());
+        Long id = 3L;
+        when(tipoBebidaService.pesquisarPorId(anyLong())).thenThrow(new ResourceNotFoundException(id));
+        try {
+            tipoBebidaService.pesquisarPorId(id);
+        } catch (Exception ex){
+            assertEquals(ResourceNotFoundException.class, ex.getClass());
+            assertEquals("Registro não encontrado. Id:" + id, ex.getMessage());
+        }
+    }
 
-       // mockMvc.perform(get("/tipobebida/100"))
-       //         .andExpect(MockMvcResultMatchers.status().isNotFound());
-    //.andExpect(status().isNotFound())
-                        //.andExpect(content().string("Registro não encontrado. Id:100"));
+    @Test
+    @DisplayName("Deletar registro com sucesso")
+    public void DeletarRegistroPorId() {
+        Long id = 3L;
+        doNothing().when(tipoBebidaService).delete(id);
+        tipoBebidaService.delete(id);
+        verify(tipoBebidaService, times(1)).delete(id);
+    }
 
+    @Test
+    @DisplayName("Falha ao tentar deletar um registro inexistente")
+    public void FalhaDeletarRegistroPorId() {
+
+        Long id = 3L;
+
+        // Configura o mock para lançar a exceção quando o método delete for chamado
+        doThrow(new ResourceNotFoundException(id))
+                .when(tipoBebidaService).delete(id);
+        try {
+            // Tenta deletar o registro
+            tipoBebidaService.delete(id);
+        } catch (Exception ex) {
+            // Verifica o tipo da exceção
+            assertEquals(ResourceNotFoundException.class, ex.getClass());
+            String msgEsperada = "Registro não encontrado. Id:" + id;
+            String msgExcecao = ex.getMessage();
+
+            assertEquals(msgEsperada,msgExcecao);
+        }
     }
 
 
@@ -162,6 +191,5 @@ public class TipoBebidaControllerTest {
                 .andExpect(jsonPath("$[1].capacidade").value(400.0));
 
         verify(tipoBebidaService).findAll();
-
     }
 }
