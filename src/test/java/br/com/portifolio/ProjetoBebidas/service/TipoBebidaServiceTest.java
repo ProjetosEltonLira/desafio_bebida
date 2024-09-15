@@ -57,9 +57,9 @@ public class TipoBebidaServiceTest {
         tipoBebidaEntity = new TipoBebidaEntity(1, "ALCOOLICA", 500D);
     }
 
-   @Test
-   @DisplayName("Teste Inserir tipo bebida")
-   public void testeInserirPedidoBebida(){
+    @Test
+    @DisplayName("Teste Inserir tipo bebida")
+    public void testeInserirPedidoBebida(){
 
        when(tipoBebidaRepository.save(any())).thenReturn(tipoBebidaEntity);
        TipoBebidaDTO retornoTipoBebidaDto = tipoBebidaService.inserir(tipoBebidaDTO);
@@ -71,7 +71,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Testar a exceção de registro não encontrado")
-    void delete_ResourceNotFoundException() {
+    public void delete_ResourceNotFoundException() {
         Long id = 1L;
         // Simula o comportamento do repositório lançando a exceção EmptyResultDataAccessException
         doThrow(EmptyResultDataAccessException.class).when(tipoBebidaRepository).deleteById(id);
@@ -87,7 +87,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Teste para deletar um registro não encontrado")
-    void delete_DataBaseException() {
+    public void delete_DataBaseException() {
         Long id = 1L;
         // Simula o comportamento do repositório lançando a exceção DataIntegrityViolationException
         doThrow(DataIntegrityViolationException.class).when(tipoBebidaRepository).deleteById(id);
@@ -103,7 +103,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Teste pesquisa de registro")
-    void pesquisarPorId() {
+    public void pesquisarPorId() {
         Long id = 1L;
 
         when(tipoBebidaRepository.findById(any())).thenReturn(Optional.ofNullable(tipoBebidaEntity));
@@ -116,7 +116,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Testar a exceção de registro não encontrado")
-    void findById_ResourceNotFoundException() {
+    public void findById_ResourceNotFoundException() {
         Long id = 1L;
 
         // Simula o comportamento do repositório lançando a exceção EmptyResultDataAccessException
@@ -132,7 +132,7 @@ public class TipoBebidaServiceTest {
     }
 
     @Test
-    void findAll_ShouldReturnListOfTipoBebidaEntities() {
+    public void findAll_ShouldReturnListOfTipoBebidaEntities() {
         // Cria uma lista simulada de TipoBebidaEntity
         List<TipoBebidaEntity> listBebidaEntities = Arrays.asList(
                 new TipoBebidaEntity(1, "Coca-Cola", 350D),
@@ -155,7 +155,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Testar a atualização de registros do Tipo de bebida")
-    void Update_TipoBebidaService() {
+    public void Update_TipoBebidaService() {
         Long id = 2L;
         tipoBebidaDTO = new TipoBebidaDTO(2, "ALCOOLICA", 500D);
 
@@ -170,7 +170,7 @@ public class TipoBebidaServiceTest {
 
     @Test
     @DisplayName("Não Atualizar, registro não encontrado")
-    void update_ResourceNotFoundException() {
+    public void update_ResourceNotFoundException() {
         Long id = 1L;
 
         // Simula o comportamento do repositório lançando a exceção EmptyResultDataAccessException

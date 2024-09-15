@@ -26,16 +26,19 @@ public class BebidaService {
     public BebidaEntity inserir(BebidaDTO bebidaDto){
 
         TipoBebidaEntity tipoBebidaEntity = tipoBebidaService.findById(bebidaDto.getTipoBebidaId());
-        BebidaEntity bebidaEntity = instanciarBebida(bebidaDto,tipoBebidaEntity);
+        BebidaEntity bebidaEntity = toBebidaEntity(bebidaDto,tipoBebidaEntity);
 
         return repository.save(bebidaEntity);
     }
 
-    private BebidaEntity instanciarBebida(BebidaDTO bebidaDto, TipoBebidaEntity tipoBebidaEntity) {
-        return new BebidaEntity(bebidaDto.getId(),
+    private BebidaEntity toBebidaEntity(BebidaDTO bebidaDto, TipoBebidaEntity tipoBebidaEntity) {
+        return new BebidaEntity(
+                bebidaDto.getId(),
                 bebidaDto.getNome(),
+
                 tipoBebidaEntity);
     }
+
     public void delete(Long id) {
         try {
             repository.deleteById(id);
@@ -54,5 +57,25 @@ public class BebidaService {
 
     public List<BebidaEntity> findAll() {
         return repository.findAll();
+    }
+
+    public void update(Long id, BebidaDTO bebidaDto) {
+        // Verifica se a bebida com o ID fornecido existe. Se não, lança uma exceção.
+        BebidaEntity bebidaExistente = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id));
+
+        // Busca o tipo de bebida associado, lançando exceção se o ID não existir
+        TipoBebidaEntity tipoBebidaExistente = tipoBebidaService.findById(bebidaDto.getTipoBebidaId());
+
+        // Atualiza a entidade existente com os novos valores do DTO
+        BebidaEntity bebidaAtualizada = updateBebidaEntity(bebidaExistente, tipoBebidaExistente, bebidaDto);
+
+        // Salva a entidade atualizada
+        repository.save(bebidaAtualizada);
+    }
+
+    private BebidaEntity updateBebidaEntity(BebidaEntity bebidaExistente, TipoBebidaEntity tipoBebidaExistente,BebidaDTO bebidaDto ) {
+        bebidaExistente.setNome(bebidaDto.getNome());
+        bebidaExistente.setTipoBebida(tipoBebidaExistente);
+        return bebidaExistente;
     }
 }
