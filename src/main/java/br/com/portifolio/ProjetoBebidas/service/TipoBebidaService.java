@@ -1,6 +1,5 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-
 import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.repository.TipoBebidaRepository;
