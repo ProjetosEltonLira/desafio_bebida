@@ -1,5 +1,5 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
