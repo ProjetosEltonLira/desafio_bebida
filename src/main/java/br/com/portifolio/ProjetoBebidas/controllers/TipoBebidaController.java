@@ -47,9 +47,4 @@ public class TipoBebidaController {
         return ResponseEntity.ok(tipoBebidaDTO);
     }
 
-    /*GetMapping (value = "/{id}") // Isso indica que permite receber um valor na URL
-    public ResponseEntity<BebidaEntity> findById(@PathVariable Long id) { // para o Spring aceitar esse valor vindo da URL precisa colocar a notação @PathVariable
-        BebidaEntity bebidaEntity = service.findById(id);
-        return ResponseEntity.ok().body(bebidaEntity);
-    }*/
 }

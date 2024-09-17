@@ -24,13 +24,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.Optional.empty;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -171,11 +168,9 @@ public class TipoBebidaControllerTest {
     @DisplayName("Selecionar todos tipos de bebidas existentes")
     public void BuscarTodosTiposBebidas() throws Exception {
 
-        TipoBebidaEntity tipoBebidaEntity = new TipoBebidaEntity(1,"bebida teste",500.0);
-        TipoBebidaEntity tipoBebidaEntity2 = new TipoBebidaEntity(2,"bebida teste2",400.0);
-        List<TipoBebidaEntity> list = new ArrayList<>();
-        list.add(tipoBebidaEntity);
-        list.add(tipoBebidaEntity2);
+        List<TipoBebidaEntity> list = Arrays.asList(
+                new TipoBebidaEntity(1, "bebida teste", 500.0),
+                new TipoBebidaEntity(2, "bebida teste2", 400.0));
 
         when(tipoBebidaService.findAll()).thenReturn(list);
 
