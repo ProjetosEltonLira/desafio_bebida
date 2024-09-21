@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.controllers;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.TipoBebidaService;
 import jakarta.validation.Valid;

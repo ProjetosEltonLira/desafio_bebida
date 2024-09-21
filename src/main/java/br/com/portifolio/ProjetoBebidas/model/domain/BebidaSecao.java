@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.model.domain;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.PedidoDTO;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 
 import java.util.Objects;

@@ -1,16 +1,12 @@
 package br.com.portifolio.ProjetoBebidas.controller;
 
 import br.com.portifolio.ProjetoBebidas.controllers.TipoBebidaController;
-import br.com.portifolio.ProjetoBebidas.handler.ResourceExceptionHandler;
-import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
-import br.com.portifolio.ProjetoBebidas.repository.TipoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.service.TipoBebidaService;
 
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.persistence.EntityNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +19,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;

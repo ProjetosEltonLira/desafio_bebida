@@ -2,6 +2,7 @@
 package br.com.portifolio.ProjetoBebidas.model.entities;
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.time.LocalDate;
 
 
 @Entity
@@ -28,7 +29,7 @@ public class HistoricoEntity {
     private String solicitante;
 
     @Column(name = "datasolicitacao")
-    private Instant momento ;
+    private LocalDate dataSolicitacao;
 
     public HistoricoEntity(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
@@ -36,7 +37,7 @@ public class HistoricoEntity {
         this.quantidade = quantidade;
         this.tipoPedido = tipoPedido;
         this.solicitante = solicitante;
-        this.momento = Instant.now();
+        this.dataSolicitacao = LocalDate.now();
     }
 
     public long getId() {
@@ -87,12 +88,12 @@ public class HistoricoEntity {
         this.solicitante = solicitante;
     }
 
-    public Instant getMomento() {
-        return momento;
+    public LocalDate getDataSolicitacao() {
+        return dataSolicitacao;
     }
 
-    public void setMomento(Instant momento) {
-        this.momento = momento;
+    public void setDataSolicitacao(LocalDate dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
     }
 
 

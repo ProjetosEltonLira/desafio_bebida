@@ -12,7 +12,7 @@ public class Histórico {
     private double quantidade;
     private String tipoPedido;
     private String solicitante;
-    private Instant momento ;
+    private Instant dataSolicitacao;
 
     public Histórico(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
@@ -62,12 +62,12 @@ public class Histórico {
         this.solicitante = solicitante;
     }
 
-    public Instant getMomento() {
-        return momento;
+    public Instant getDataSolicitacao() {
+        return dataSolicitacao;
     }
 
-    public void setMomento(Instant momento) {
-        this.momento = momento;
+    public void setDataSolicitacao(Instant dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class Histórico {
                 ", quantidade=" + quantidade +
                 ", tipoPedido='" + tipoPedido + '\'' +
                 ", solicitante='" + solicitante + '\'' +
-                ", momento=" + momento +
+                ", momento=" + dataSolicitacao +
                 '}';
     }
 }

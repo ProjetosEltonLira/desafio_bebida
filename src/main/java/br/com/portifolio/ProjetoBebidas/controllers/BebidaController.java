@@ -1,8 +1,7 @@
 package br.com.portifolio.ProjetoBebidas.controllers;
 
 
-import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
-import br.com.portifolio.ProjetoBebidas.model.dto.BebidaDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.BebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
 import br.com.portifolio.ProjetoBebidas.service.BebidaService;
 import org.springframework.beans.factory.annotation.Autowired;

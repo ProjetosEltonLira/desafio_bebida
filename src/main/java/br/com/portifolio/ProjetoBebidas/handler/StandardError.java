@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.handler;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.ResponseObjectDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.response.ResponseObjectDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 

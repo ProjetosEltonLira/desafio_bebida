@@ -1,4 +1,4 @@
-package br.com.portifolio.ProjetoBebidas.model.dto;
+package br.com.portifolio.ProjetoBebidas.model.dto.request;
 
 
 

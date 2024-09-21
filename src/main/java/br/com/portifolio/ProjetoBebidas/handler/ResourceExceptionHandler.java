@@ -1,6 +1,6 @@
 package br.com.portifolio.ProjetoBebidas.handler;
 
-import br.com.portifolio.ProjetoBebidas.model.dto.ResponseObjectDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.response.ResponseObjectDTO;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.DataBaseException;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ControllerAdvice //isso que vai interceptar as exceções que acontecerem
 public class ResourceExceptionHandler {

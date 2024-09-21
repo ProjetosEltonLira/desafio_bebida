@@ -1,18 +1,9 @@
 package br.com.portifolio.ProjetoBebidas.service;
 
-import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
-import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoResponseDTO;
-import br.com.portifolio.ProjetoBebidas.model.dto.TipoBebidaDTO;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaEntity;
-import br.com.portifolio.ProjetoBebidas.model.entities.BebidaSecaoEntity;
-import br.com.portifolio.ProjetoBebidas.model.entities.SecaoEntity;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.TipoBebidaDTO;
 import br.com.portifolio.ProjetoBebidas.model.entities.TipoBebidaEntity;
-import br.com.portifolio.ProjetoBebidas.repository.SecaoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.repository.TipoBebidaRepository;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.DataBaseException;
-import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ResourceNotFoundException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +17,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;

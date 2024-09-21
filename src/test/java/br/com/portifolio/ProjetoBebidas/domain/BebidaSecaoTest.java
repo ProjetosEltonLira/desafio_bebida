@@ -4,7 +4,7 @@ import br.com.portifolio.ProjetoBebidas.model.domain.Bebida;
 import br.com.portifolio.ProjetoBebidas.model.domain.BebidaSecao;
 import br.com.portifolio.ProjetoBebidas.model.domain.Secao;
 import br.com.portifolio.ProjetoBebidas.model.domain.TipoBebida;
-import br.com.portifolio.ProjetoBebidas.model.dto.PedidoDTO;
+import br.com.portifolio.ProjetoBebidas.model.dto.request.PedidoDTO;
 import br.com.portifolio.ProjetoBebidas.service.exceptions.ExceptionError;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
