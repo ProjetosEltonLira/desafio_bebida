@@ -1,8 +1,12 @@
 
 package br.com.portifolio.ProjetoBebidas.model.entities;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -29,15 +33,17 @@ public class HistoricoEntity {
     private String solicitante;
 
     @Column(name = "datasolicitacao")
-    private LocalDate dataSolicitacao;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    private LocalDateTime dataSolicitacao;
 
+    public HistoricoEntity(){}
     public HistoricoEntity(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
         this.bebidaId = bebidaId;
         this.quantidade = quantidade;
         this.tipoPedido = tipoPedido;
         this.solicitante = solicitante;
-        this.dataSolicitacao = LocalDate.now();
+        this.dataSolicitacao = LocalDateTime.now();
     }
 
     public long getId() {
@@ -88,11 +94,11 @@ public class HistoricoEntity {
         this.solicitante = solicitante;
     }
 
-    public LocalDate getDataSolicitacao() {
+    public LocalDateTime getDataSolicitacao() {
         return dataSolicitacao;
     }
 
-    public void setDataSolicitacao(LocalDate dataSolicitacao) {
+    public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 

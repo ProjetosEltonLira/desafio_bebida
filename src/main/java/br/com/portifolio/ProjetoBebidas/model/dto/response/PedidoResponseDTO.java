@@ -18,10 +18,10 @@ public class PedidoResponseDTO implements Serializable {
     private double quantidade;
     private String tipoPedido;
     private String solicitante;
-    private LocalDate dataSolicitacao;
+    private LocalDateTime dataSolicitacao;
 
     public PedidoResponseDTO(){}
-    public PedidoResponseDTO(long id, long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante, LocalDate dataSolicitacao) {
+    public PedidoResponseDTO(long id, long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante, LocalDateTime dataSolicitacao) {
         this.id = id;
         this.secaoId = secaoId;
         this.bebidaId = bebidaId;
@@ -29,6 +29,14 @@ public class PedidoResponseDTO implements Serializable {
         this.tipoPedido = tipoPedido;
         this.solicitante = solicitante;
         this.dataSolicitacao = dataSolicitacao;
+    }
+    public PedidoResponseDTO(long id, long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
+        this.id = id;
+        this.secaoId = secaoId;
+        this.bebidaId = bebidaId;
+        this.quantidade = quantidade;
+        this.tipoPedido = tipoPedido;
+        this.solicitante = solicitante;
     }
     public PedidoResponseDTO(long secaoId, long bebidaId, double quantidade, String tipoPedido, String solicitante) {
         this.secaoId = secaoId;
@@ -86,11 +94,11 @@ public class PedidoResponseDTO implements Serializable {
         this.solicitante = solicitante;
     }
 
-    public LocalDate getDataSolicitacao() {
+    public LocalDateTime getDataSolicitacao() {
         return dataSolicitacao;
     }
 
-    public void setDataSolicitacao(LocalDate dataSolicitacao) {
+    public void setDataSolicitacao(LocalDateTime dataSolicitacao) {
         this.dataSolicitacao = dataSolicitacao;
     }
 }
